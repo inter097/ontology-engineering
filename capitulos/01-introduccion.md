@@ -100,6 +100,55 @@ Mira los dos cuantificadores de esa única línea:
 ∃eats.Impala      →  "come al menos un impala"      SÍ obliga
 ```
 
+<details class="peras">
+<summary>¿Y esos símbolos? Explicado con peras y manzanas</summary>
+
+Olvida los símbolos un momento. Imagina que tienes un frutero y quieres describir a
+alguien qué come tu mascota.
+
+**`∃come.Pera`** — «come **alguna** pera». Es una **promesa de que existe**. Si
+dices esto, te comprometes a que haya al menos una pera comida por ahí. Si tu
+mascota no ha comido nada en su vida, la frase es **falsa**.
+
+**`∀come.Pera`** — «come **solo** peras». Ojo, que no dice lo que parece. No dice
+«come peras». Dice **«no come nada que no sea pera»**. Es una prohibición, no una
+promesa.
+
+Y ahí está la trampa: **una piedra cumple `∀come.Pera`**. Una piedra no come nada,
+así que es literalmente cierto que «no come nada que no sea pera». No hay ningún
+contraejemplo, luego la frase es verdadera. A esto se le llama que se cumple **de
+forma vacía**.
+
+| Lo que quieres decir | Lo que hay que escribir |
+|---|---|
+| «come peras» | `∃come.Pera` |
+| «no come otra cosa que peras» | `∀come.Pera` |
+| «come peras y nada más» | `∃come.Pera ⊓ ∀come.Pera` — **las dos juntas** |
+
+La tercera fila es la que casi nadie escribe, y es casi siempre la que hacía falta.
+
+Los otros dos símbolos que salen en esta página:
+
+- **`⊑`** se lee «es un tipo de». `lion ⊑ animal` = todo león es un animal.
+- **`⊓`** se lee «y». `Impala ⊓ herbivore` = las cosas que son impala **y** además
+  herbívoro.
+- **`⊥`** se lee «imposible, no puede existir». `carnivore ⊓ herbivore ⊑ ⊥` = nada
+  puede ser carnívoro y herbívoro a la vez.
+
+Con eso ya se lee la línea del león entera:
+
+```
+lion ⊑ ∀eats.herbivore ⊓ ∃eats.Impala
+```
+
+> «Todo león **es de tal tipo que**: no come nada que no sea herbívoro, **y** come
+> al menos un impala.»
+
+Si quieres la versión larga de por qué esto importa tanto, está en el
+[capítulo 2](/capitulos/02-logica-primer-orden/), con frutero incluido.
+
+</details>
+
 `∀eats.plant` **lo cumple una piedra**. Una piedra no come nada, luego «todo lo que
 come es planta» es verdad de forma vacía. `∀` no dice «come plantas», dice «no come
 nada que no sea planta».

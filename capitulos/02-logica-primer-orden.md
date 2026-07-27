@@ -9,6 +9,43 @@ El capítulo 2 es la maquinaria. No hay ontologías aquí: hay lógica de primer
 teoría de modelos y tres formas distintas de sacar conclusiones. Es corto y el libro
 lo llama explícitamente *in a nutshell* — no pretende sustituir un curso de lógica.
 
+<details class="peras">
+<summary>Chuleta de símbolos — qué se lee en voz alta cuando aparece cada uno</summary>
+
+De aquí en adelante los símbolos salen en todas las páginas. Ninguno es difícil;
+solo hay que saber cómo se pronuncia.
+
+| Símbolo | Se lee | Ejemplo |
+|---|---|---|
+| `∀x` | «para todo x» | `∀x(León(x) → Mamífero(x))` — todo león es mamífero |
+| `∃y` | «existe algún y» | `∃y(Pera(y))` — hay al menos una pera |
+| `→` | «si… entonces» | `Pera(x) → Fruta(x)` |
+| `∧` | «y» | `Pera(x) ∧ Madura(x)` |
+| `∨` | «o» (no excluyente) | `Pera(x) ∨ Manzana(x)` |
+| `¬` | «no» | `¬Madura(x)` |
+| `⊨` | «se sigue de» / «aquí se cumple» | `T ⊨ α` — de mis reglas se sigue α |
+| `⊭` | «no se sigue» | lo mismo, tachado |
+| `Δ` | «el conjunto de cosas que existen» | el frutero |
+
+Y estos son de lógica descriptiva, el dialecto abreviado que usa OWL. Dicen lo
+mismo con menos letras:
+
+| Símbolo | Se lee | Equivale a |
+|---|---|---|
+| `⊑` | «es un tipo de» / «está incluido en» | `León ⊑ Mamífero` = `∀x(León(x) → Mamífero(x))` |
+| `≡` | «es exactamente lo mismo que» | definición: condiciones necesarias **y** suficientes |
+| `⊓` | «y» (intersección) | `Pera ⊓ Madura` — las peras maduras |
+| `⊔` | «o» (unión) | `Pera ⊔ Manzana` |
+| `∃come.Planta` | «come alguna planta» | obliga a que coma algo |
+| `∀come.Planta` | «solo come plantas» | **no** obliga a comer nada |
+| `⊤` | «cualquier cosa» | el frutero entero |
+| `⊥` | «nada» / «imposible» | `A ⊓ B ⊑ ⊥` = A y B no pueden coincidir |
+
+La pareja `∃`/`∀` es la que da todos los disgustos, y tiene su propia sección más
+abajo.
+
+</details>
+
 Pero resuelve algo que quedó suelto en el capítulo 1. Allí el razonador se negó a
 deducir que los impalas son herbívoros, y quedó como una rareza del mundo abierto.
 No lo es. Es que **aquello nunca fue una deducción**.
@@ -29,6 +66,85 @@ El aparato semántico de §2.1.2 se resume en tres piezas:
 
 `M ⊨ φ` se lee «`M` es un modelo de `φ`», o sea «`φ` es verdadera en esa
 estructura».
+
+<details class="peras">
+<summary>Un momento — ¿esto qué es? Explicado con peras y manzanas</summary>
+
+Literalmente con peras y manzanas. Imagina un frutero encima de la mesa.
+
+**Δ (delta) es el frutero: la bolsa de cosas que existen.** Nada más. Aquí dentro
+hay tres cosas y les ponemos nombre para poder señalarlas:
+
+```
+Δ = { 🍐₁ , 🍐₂ , 🍎₁ }
+```
+
+Δ tiene que ser **no vacío** porque una teoría sobre un mundo donde no hay nada no
+sirve de mucho.
+
+**El vocabulario V son las palabras que te dejas usar.** Tú decides cuáles. Por
+ejemplo tres: la palabra `EsPera`, la palabra `EsManzana`, y el nombre propio
+`mi_favorita`.
+
+Ojo: las palabras **todavía no significan nada**. `EsPera` es un ruido. Podría
+acabar significando «es roja» o «pesa más de 100 gramos». Que se llame `EsPera` es
+una comodidad tuya, y el razonador ni la mira.
+
+**La interpretación es apuntar con el dedo: qué palabra señala a qué cosa.** Y
+tiene una regla por cada tipo de palabra:
+
+| Tipo de palabra | A qué apunta | Ejemplo |
+|---|---|---|
+| **Constante** (un nombre propio) | a **una** cosa del frutero | `mi_favorita` → 🍐₁ |
+| **Relación de 1 hueco** (una propiedad) | a un **grupo** de cosas | `EsPera` → { 🍐₁, 🍐₂ } |
+| **Relación de 2 huecos** | a un grupo de **parejas** | `estáAlLadoDe` → { (🍐₁,🍎₁), (🍎₁,🍐₂) } |
+
+Eso, y nada más, es lo que quiere decir la frase fea *«a cada relación n-aria, un
+subconjunto de Δⁿ»*. «n-aria» = con n huecos. Δ² son todas las parejas posibles que
+puedes formar con las cosas del frutero, y la relación se queda con algunas.
+
+**Estructura M = el frutero + el apuntar con el dedo.** Un mundo concreto, entero,
+sin ambigüedad. Nada de «depende».
+
+**Ahora escribes una frase** (`φ`), usando solo tus palabras:
+
+> *«Todo lo que es pera está al lado de algo que es manzana.»*
+
+Y la miras en tu frutero. ¿Se cumple? 🍐₁ está al lado de 🍎₁ ✓. Pero 🍐₂ — nadie
+dijo que esté al lado de una manzana ✗. Luego la frase es **falsa** en este frutero.
+
+**`M ⊨ φ` se lee «en este frutero, esa frase sale verdadera».** El símbolo `⊨` es
+un «aquí se cumple». Aquí no se cumple, así que escribiríamos `M ⊭ φ`.
+
+**Un modelo** es un frutero donde salen verdaderas **todas** tus frases a la vez.
+Si mueves 🍐₂ al lado de la manzana, ese nuevo frutero sí es un modelo de tu frase.
+
+---
+
+**Y ahora lo importante, que es de dónde viene todo el lío.**
+
+`T ⊨ α` no habla de *tu* frutero. Dice:
+
+> *«En **absolutamente todos** los fruteros donde mis frases salen verdaderas,
+> también sale verdadera α.»*
+
+Fruteros con dos peras, con mil, con peras que además son manzanas si nadie lo ha
+prohibido, con fruta que no has visto nunca. **Todos.**
+
+Por eso el razonador te lleva la contraria tanto. Tú piensas en el frutero de tu
+cocina; él revisa todos los fruteros imaginables que encajen con lo que escribiste.
+Y le basta encontrar **uno solo** donde `α` falle para decirte que no se deduce.
+
+Eso es exactamente lo que pasó con el impala unas líneas más abajo. Tú tenías en la
+cabeza el frutero donde todos los impalas son herbívoros. El razonador encontró otro
+—impalas que ningún león se come y no son herbívoros— que también encaja con lo
+escrito. Con eso basta.
+
+**Moraleja:** cuando el razonador no deduce algo «evidente», no está roto. Está
+diciéndote *«existe un frutero que encaja con tus reglas y donde eso es falso»*. Y
+casi siempre tiene razón: te faltaba escribir una regla.
+
+</details>
 
 Y de aquí sale la noción que de verdad usas todos los días:
 

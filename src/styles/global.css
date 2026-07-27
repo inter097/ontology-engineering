@@ -111,6 +111,35 @@ th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; colo
 .capitulo h2 { margin: 0 0 0.3rem; font-size: 1.2rem; }
 .capitulo h2 a { text-decoration: none; }
 .capitulo p { margin: 0 0 0.75rem; color: var(--muted); }
+/* --- bloques «explicado con peras y manzanas» --- */
+details.peras {
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  background: var(--code-bg);
+  padding: 0 1rem;
+  margin: 1.75rem 0;
+}
+details.peras > summary {
+  cursor: pointer;
+  padding: 0.85rem 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--accent);
+  list-style: none;
+}
+details.peras > summary::-webkit-details-marker { display: none; }
+details.peras > summary::before {
+  content: '▸';
+  display: inline-block;
+  width: 1.1em;
+  transition: transform 0.15s;
+}
+details.peras[open] > summary::before { transform: rotate(90deg); }
+details.peras[open] > summary { border-bottom: 1px solid var(--line); }
+details.peras > *:not(summary) { font-size: 0.97rem; }
+details.peras > *:last-child { margin-bottom: 1.1rem; }
+
 .pendiente { color: var(--muted); font-style: italic; }
 
 footer {
