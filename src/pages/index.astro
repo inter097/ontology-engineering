@@ -33,29 +33,6 @@ const publicados = new Set(entradas.map((e) => e.data.capitulo));
     conviene como base — las decisiones quedan citables.
   </p>
 
-  <h2>Cómo se lee esto</h2>
-  <p>
-    Herramienta primero, teoría después: <b>4 (OWL 2) → 3 (lógicas descriptivas) →
-    6 (top-down) → 5 (metodologías) → 10 (modelado avanzado)</b>. El capítulo 1 va
-    antes que todos porque es el que fija el vocabulario.
-  </p>
-  <p>
-    El riesgo de posponer el 3 es concreto: las lógicas descriptivas son lo que
-    explica <i>por qué</i> el razonador infiere lo que infiere. El error clásico es
-    tratar <code>domain</code> y <code>range</code> como restricciones que validan
-    datos, cuando en OWL son reglas de inferencia — no rechazan nada, infieren
-    tipos.
-  </p>
-
-  <h2>Una advertencia sobre la numeración</h2>
-  <p>
-    La numeración que circula suele estar corrida <b>+1</b>, porque cuenta el
-    <i>«How to Use the Book»</i> como capítulo 1. LibreTexts publica el capítulo 1
-    del libro bajo una URL que dice <code>02</code>. Aquí se usa la numeración del
-    autor. Al citar, indicar la edición: la 2ª coincide hasta el 9 y difiere a
-    partir del 10.
-  </p>
-
   <h2>Capítulos</h2>
   {
     CAPITULOS.map((cap) => {
