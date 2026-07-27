@@ -339,3 +339,61 @@ estructura es lo que la interpretación fija, no lo que se ve en el papel.
 son criterio propio, verificados con HermiT. Numeración y enunciados tomados del PDF
 en <a href="https://github.com/inter097/ontology-engineering/tree/main/libro">/libro</a>,
 no de ediciones web que renumeran las secciones.</small>
+
+<details class="defensa">
+<summary>Para la defensa — lo que te van a preguntar de aquí</summary>
+
+**«¿Qué significa exactamente `T ⊨ α`?»**
+
+Que en **todos** los modelos de `T`, `α` es verdadera. Es una cuantificación sobre
+modelos, no una afirmación sobre el modelo que uno tiene en mente. La consecuencia
+práctica es que basta **un solo** modelo donde `α` falle para que no se siga — y ese
+modelo puede ser uno que el modelador nunca consideró.
+
+**«¿Qué diferencia hay entre deducción, abducción e inducción? ¿Cuál hace un
+razonador OWL?»**
+
+Solo **deducción**, y solo esa. La deducción conserva la verdad: si las premisas son
+verdaderas, la conclusión lo es. La abducción propone una hipótesis que *explicaría*
+una observación, y la inducción generaliza desde individuos; ninguna de las dos
+conserva la verdad, y por tanto ninguna está en un razonador de ontologías.
+
+*El matiz que conviene añadir:* una deducción, estrictamente, no aporta conocimiento
+nuevo — solo hace explícito lo que ya estaba. Que a un experto le parezca un
+descubrimiento es una cuestión del tamaño de la teoría, no de creatividad del
+sistema.
+
+**«¿Cómo demuestras que algo NO se sigue de tu ontología?»**
+
+Por **refutación**, que es el método del propio capítulo: `T ⊨ α` si y solo si
+`T ∪ {¬α}` es inconsistente. Luego para probar que `α` **no** se sigue, se añade
+`¬α` y se comprueba que la ontología sigue siendo consistente. Es una prueba, no la
+ausencia de un resultado.
+
+*Por qué es una respuesta fuerte:* casi todo el mundo mira solo qué salió
+clasificado, y de ahí no se puede concluir nada — el silencio de un razonador no es
+evidencia sin esta comprobación. En este trabajo se usa para demostrar que
+`Impala ⊑ herbivore` no es una consecuencia de la ontología del libro, sino una
+abducción.
+
+**«¿Por qué te fías del razonador?»**
+
+Por dos propiedades que hay que nombrar juntas: **corrección** (todo lo que deduce
+es verdadero en la teoría) y **completitud** (deduce todo lo que es verdadero en
+ella). Sin corrección, lo que afirma no vale; sin completitud, **su silencio no
+significa nada** — podría haber una consecuencia que simplemente no encuentra.
+
+*Aquí es donde conectar con los perfiles de OWL 2:* un razonador puede ser completo
+para un fragmento del lenguaje e incompleto si la ontología usa construcciones fuera
+de él. Por eso importa saber en qué perfil está una ontología antes de interpretar
+lo que el razonador no dijo.
+
+**«Si tu ontología es consistente pero no deduce lo que esperabas, ¿qué haces?»**
+
+Primero comprobar por refutación si realmente es una deducción o estaba abduciendo.
+Si no se sigue, la pregunta correcta no es «¿qué le pasa al razonador?» sino «¿qué
+axioma me falta?». Y al añadirlo, vigilar no meter una hipótesis más fuerte de lo
+que los datos justifican: casi siempre existe una versión más débil que explica lo
+mismo.
+
+</details>

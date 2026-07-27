@@ -424,3 +424,58 @@ sería caer justo en la trampa que el capítulo acaba de explicar.
 <small>Salvo los enunciados citados y la ontología de ejemplo, el análisis de esta
 página es criterio propio, verificado con HermiT. Numeración del autor: este es el
 capítulo 1; LibreTexts lo publica como «02».</small>
+
+<details class="defensa">
+<summary>Para la defensa — lo que te van a preguntar de aquí</summary>
+
+**«¿Qué definición de ontología adoptas, y por qué esa?»**
+
+La de **Guarino (1998)**: una teoría lógica que da cuenta del significado pretendido
+de un vocabulario formal. Y la razón no es de gusto: es la única de las cuatro que
+es **operativa**. Explica qué haces al añadir un axioma —restringir los modelos
+hacia los pretendidos— y por tanto da un criterio para decidir si un axioma sobra o
+falta. La de Gruber es la más citada y no permite decidir nada, porque ni
+«especificación» ni «conceptualización» están definidas.
+
+*Si preguntan por qué no la de Studer et al., que es la más habitual:* añade
+«formal, explícita y compartida», que son mejoras reales, pero deja «compartida» sin
+definir, y esa es justamente la parte que en la práctica decide si una ontología
+sirve o no.
+
+**«¿En qué se diferencia tu ontología de un modelo entidad-relación o de un esquema
+de base de datos?»**
+
+En cuatro cosas, y conviene darlas ordenadas: alcance (independiente de la
+aplicación frente a específica de una), formalización (teoría lógica frente a
+diagrama informal), servicios (inferencia automatizada frente a solo consultas) y
+supuesto (mundo abierto frente a mundo cerrado).
+
+El último es el que tiene consecuencias técnicas y es el que hay que saber defender
+con un ejemplo. Un esquema relacional rechaza lo que no encaja; una ontología no
+puede rechazar nada, solo clasificar.
+
+**«¿Cómo evalúas la calidad de una ontología? No hay un RMSE.»**
+
+Correcto, no lo hay, y decirlo de entrada es mejor que fingir una métrica. Se evalúa
+con dos ejes —**precisión** (¿solo lo pretendido?) y **cobertura** (¿todo lo
+pretendido?)— y con una batería de artefactos automatizables: razonador
+(consistencia y satisfacibilidad), **preguntas de competencia** (consulta con
+respuesta esperada, que es el equivalente real de las pruebas unitarias), OOPS! para
+pitfalls conocidos, y métricas estructurales.
+
+*El punto fuerte de esta respuesta:* los tres niveles de error no cuestan lo mismo.
+El sintáctico lo pilla el parser, el lógico lo pilla el razonador, y el **semántico
+no lo pilla nadie**. Por eso las preguntas de competencia no son un extra: son el
+único control sobre la clase de error más cara.
+
+**«Tu razonador dice que la ontología es consistente. ¿Eso no basta?»**
+
+No, y esta es la pregunta con la que más gente se cae. Consistente significa que lo
+escrito no se contradice, no que sea lo que se quería decir. Lo tengo demostrado:
+`AfricanWildlifeOntology1.owl`, la ontología de ejemplo del propio libro, es
+consistente, no tiene clases insatisfacibles y clasifica correctamente jirafas y
+leones — y basta afirmar un individuo que no come nada para volverla inconsistente,
+por un `⊔` colocado fuera del alcance de un `∀`. Está en el caso de estudio de esta
+página y es reproducible con un script.
+
+</details>

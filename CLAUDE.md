@@ -108,3 +108,32 @@ estudio.
 
 Aún sin usar, pero previstos: Protégé (inspección manual), ROBOT (CLI de
 razonamiento y métricas), OOPS!.
+
+## Bloque «para la defensa»
+
+El repositorio es material de **tesis**. Cada capítulo cierra con un
+`<details class="defensa">` con las preguntas que un tribunal haría sobre ese
+capítulo y la respuesta corta y defendible. Reglas:
+
+- Pregunta en negrita y entrecomillada, como la formularía el tribunal.
+- Respuesta directa en la primera frase; el desarrollo después.
+- Cuando haya una réplica previsible, anticiparla con *«si insisten:»* o
+  *«el matiz que conviene añadir:»*.
+- Apoyarse en lo verificado en el caso de estudio del propio capítulo. Una
+  respuesta que cita una comprobación reproducible vale más que una correcta
+  pero genérica.
+
+Va **después** del cierre del capítulo, nunca en medio.
+
+## Explicaciones en lenguaje llano
+
+Los `<details class="peras">` explican notación y conceptos abstractos sin jerga.
+Orden obligatorio: **primero la idea en lenguaje corriente con una situación
+cotidiana, después la definición formal** — nunca al revés. La formal va en su
+propio desplegable si hace falta citarla.
+
+Los símbolos viven en `capitulos/00-simbolos.md` (capítulo 0, página propia, no del
+libro). Los demás capítulos **enlazan ahí** en vez de repetir la tabla.
+
+**Markdown dentro de `<details>`:** hace falta una línea en blanco después de
+`</summary>`, o el bloque HTML se traga el markdown y las tablas salen en crudo.

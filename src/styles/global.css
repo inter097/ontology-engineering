@@ -140,6 +140,40 @@ details.peras[open] > summary { border-bottom: 1px solid var(--line); }
 details.peras > *:not(summary) { font-size: 0.97rem; }
 details.peras > *:last-child { margin-bottom: 1.1rem; }
 
+/* --- bloque «para la defensa»: mismo patrón, otro acento --- */
+details.defensa {
+  border: 1px solid var(--line);
+  border-left: 3px solid #6b7f4a;
+  border-radius: 4px;
+  background: var(--code-bg);
+  padding: 0 1rem;
+  margin: 2.5rem 0 1rem;
+}
+details.defensa > summary {
+  cursor: pointer;
+  padding: 0.85rem 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #6b7f4a;
+  list-style: none;
+}
+details.defensa > summary::-webkit-details-marker { display: none; }
+details.defensa > summary::before {
+  content: '▸';
+  display: inline-block;
+  width: 1.1em;
+  transition: transform 0.15s;
+}
+details.defensa[open] > summary::before { transform: rotate(90deg); }
+details.defensa[open] > summary { border-bottom: 1px solid var(--line); }
+details.defensa > *:not(summary) { font-size: 0.97rem; }
+details.defensa > *:last-child { margin-bottom: 1.1rem; }
+
+@media (prefers-color-scheme: dark) {
+  details.defensa { border-left-color: #9cb36a; }
+  details.defensa > summary { color: #9cb36a; }
+}
+
 .pendiente { color: var(--muted); font-style: italic; }
 
 footer {

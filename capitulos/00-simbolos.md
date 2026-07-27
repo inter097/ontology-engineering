@@ -221,3 +221,59 @@ Y dos que suenan parecido y no lo son:
 <small>Página propia, no del libro. Está aquí porque Keet formaliza esto en §2.1
 (primer orden) y §3.1 (lógicas descriptivas), y viene bien tenerlo resumido antes.
 Cualquier error de esta página es mío, no suyo.</small>
+
+<details class="defensa">
+<summary>Para la defensa — lo que te van a preguntar de aquí</summary>
+
+**«¿Por qué usas lógica descriptiva y no lógica de primer orden, que es más
+expresiva?»**
+
+Por **decidibilidad**. La lógica de primer orden completa es indecidible: existen
+preguntas para las que ningún algoritmo puede garantizar una respuesta en tiempo
+finito. Las lógicas descriptivas son fragmentos elegidos precisamente para que todo
+razonamiento termine siempre. Se renuncia a expresividad a cambio de que la
+herramienta conteste — y sin esa garantía no hay razonador utilizable, luego no hay
+ontología operativa.
+
+*Si insisten:* el compromiso no es binario. Los perfiles de OWL 2 (EL, QL, RL)
+recortan aún más para bajar de exponencial a polinómico, cada uno optimizado para un
+caso de uso. Se elige el fragmento por el problema, no al revés.
+
+**«¿Qué diferencia hay entre `∃R.C` y `∀R.C`?»**
+
+`∃R.C` es una **condición de existencia**: obliga a que haya al menos un individuo
+relacionado por `R` que sea del tipo `C`. `∀R.C` es una **restricción de tipo sobre
+lo que haya**: no obliga a que exista nada, solo prohíbe que lo que exista sea de
+otro tipo. Por eso `∀R.C` se satisface **de forma vacía** para cualquier individuo
+sin relaciones `R`.
+
+*La consecuencia que conviene mencionar tú antes de que te la saquen:* dentro de una
+clase **definida** (`≡`), esa satisfacción vacía arrastra a la clase a todo
+individuo sin esa relación. Es un error real y documentado; está el caso del
+capítulo 1.
+
+**«¿Qué implica el supuesto de mundo abierto para la validación de datos?»**
+
+Que no hay validación. Bajo mundo abierto la ausencia de un dato no es una
+violación, es desconocimiento, así que ninguna construcción del lenguaje puede
+rechazar una instancia. `rdfs:domain` y `rdfs:range` no son restricciones de
+integridad: son **axiomas de los que se infieren tipos**. Confundirlos con las
+restricciones de un esquema relacional es el error de traslación más común entre
+quien viene de bases de datos.
+
+*Si quieren cerrar el mundo:* eso es otra cosa —SHACL, ShEx, o razonamiento con
+supuesto de nombres únicos y mundo cerrado— y hay que decir explícitamente que se
+sale de OWL.
+
+**«¿Cuándo usas una clase primitiva y cuándo una definida?»**
+
+Primitiva (`⊑`) cuando las condiciones son **necesarias pero no suficientes**: todo
+león es un animal, pero ser animal no basta para ser león. Definida (`≡`) cuando son
+**necesarias y suficientes**, y entonces el razonador clasifica automáticamente
+dentro de esa clase todo lo que las cumpla.
+
+La regla práctica: si no vas a querer que el razonador meta cosas ahí solo, no la
+definas. Las clases definidas son potentes y son también donde se concentran los
+errores, porque su efecto es automático y silencioso.
+
+</details>
