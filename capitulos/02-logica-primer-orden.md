@@ -10,39 +10,32 @@ teoría de modelos y tres formas distintas de sacar conclusiones. Es corto y el 
 lo llama explícitamente *in a nutshell* — no pretende sustituir un curso de lógica.
 
 <details class="peras">
-<summary>Chuleta de símbolos — qué se lee en voz alta cuando aparece cada uno</summary>
+<summary>Los símbolos, en dos minutos</summary>
 
-De aquí en adelante los símbolos salen en todas las páginas. Ninguno es difícil;
-solo hay que saber cómo se pronuncia.
+Los símbolos dan más miedo del que merecen. Cada uno es una palabra abreviada.
+Estos son los únicos que hacen falta:
 
-| Símbolo | Se lee | Ejemplo |
+| Cuando veas | Lee | Ejemplo |
 |---|---|---|
-| `∀x` | «para todo x» | `∀x(León(x) → Mamífero(x))` — todo león es mamífero |
-| `∃y` | «existe algún y» | `∃y(Pera(y))` — hay al menos una pera |
-| `→` | «si… entonces» | `Pera(x) → Fruta(x)` |
-| `∧` | «y» | `Pera(x) ∧ Madura(x)` |
-| `∨` | «o» (no excluyente) | `Pera(x) ∨ Manzana(x)` |
-| `¬` | «no» | `¬Madura(x)` |
-| `⊨` | «se sigue de» / «aquí se cumple» | `T ⊨ α` — de mis reglas se sigue α |
-| `⊭` | «no se sigue» | lo mismo, tachado |
-| `Δ` | «el conjunto de cosas que existen» | el frutero |
+| `∀` | «todos» | «todos los leones son mamíferos» |
+| `∃` | «algún» | «hay algún león» |
+| `¬` | «no» | |
+| `⊑` | «es un tipo de» | `león ⊑ animal` — un león es un tipo de animal |
+| `⊓` | «y a la vez» | `león ⊓ hambriento` — leones que además tienen hambre |
+| `⊔` | «o» | |
+| `⊥` | «imposible» | |
+| `⊨` | «se sigue» | |
 
-Y estos son de lógica descriptiva, el dialecto abreviado que usa OWL. Dicen lo
-mismo con menos letras:
+Y uno compuesto, que es el que importa de verdad:
 
-| Símbolo | Se lee | Equivale a |
-|---|---|---|
-| `⊑` | «es un tipo de» / «está incluido en» | `León ⊑ Mamífero` = `∀x(León(x) → Mamífero(x))` |
-| `≡` | «es exactamente lo mismo que» | definición: condiciones necesarias **y** suficientes |
-| `⊓` | «y» (intersección) | `Pera ⊓ Madura` — las peras maduras |
-| `⊔` | «o» (unión) | `Pera ⊔ Manzana` |
-| `∃come.Planta` | «come alguna planta» | obliga a que coma algo |
-| `∀come.Planta` | «solo come plantas» | **no** obliga a comer nada |
-| `⊤` | «cualquier cosa» | el frutero entero |
-| `⊥` | «nada» / «imposible» | `A ⊓ B ⊑ ⊥` = A y B no pueden coincidir |
+- `∃come.Carne` = **«come carne»**
+- `∀come.Carne` = **«no come otra cosa que carne»**
 
-La pareja `∃`/`∀` es la que da todos los disgustos, y tiene su propia sección más
-abajo.
+Parecen lo mismo y no lo son. Tienen su propio apartado más abajo, porque es de
+donde salen casi todos los errores.
+
+Eso es todo. Si en algún momento aparece un símbolo que no está aquí, la página
+lo explica al lado.
 
 </details>
 
@@ -56,93 +49,95 @@ No lo es. Es que **aquello nunca fue una deducción**.
 significan. Son independientes: una fórmula puede ser sintácticamente impecable y
 no decir nada de lo que creías.
 
-El aparato semántico de §2.1.2 se resume en tres piezas:
+Para darle significado a una frase hace falta describir **una situación concreta**
+donde mirarla. El libro le llama *estructura*; puedes pensarlo como «un mundo
+posible». Tiene tres partes, y ninguna es complicada:
 
-| Pieza | Qué es |
-|---|---|
-| **Vocabulario** `V` | los símbolos de función, relación y constante que usas |
-| **Estructura** `M` | un conjunto no vacío `Δ` más una interpretación de `V`: a cada constante, un elemento de `Δ`; a cada relación n-aria, un subconjunto de `Δⁿ` |
-| **Modelo** | una estructura que hace verdaderas todas las sentencias de tu teoría |
+- **las cosas que hay** en ese mundo;
+- **las palabras** que te dejas usar;
+- **a qué apunta cada palabra** — qué cosa es «la mesa», qué grupo de cosas son
+  «sillas».
 
-`M ⊨ φ` se lee «`M` es un modelo de `φ`», o sea «`φ` es verdadera en esa
-estructura».
+Un **modelo** de tu teoría es un mundo donde **todo** lo que escribiste sale
+verdadero.
 
 <details class="peras">
-<summary>Un momento — ¿esto qué es? Explicado con peras y manzanas</summary>
+<summary>¿Y esto qué quiere decir? Sin jerga</summary>
 
-Literalmente con peras y manzanas. Imagina un frutero encima de la mesa.
+Imagina que describes una habitación por teléfono a alguien que no la ve.
 
-**Δ (delta) es el frutero: la bolsa de cosas que existen.** Nada más. Aquí dentro
-hay tres cosas y les ponemos nombre para poder señalarlas:
+Le dices tres cosas: *«hay una mesa», «hay una silla», «la silla está junto a la
+mesa»*.
 
-```
-Δ = { 🍐₁ , 🍐₂ , 🍎₁ }
-```
+Esa persona ahora se imagina la habitación. Pero no hay **una** habitación posible:
+hay miles. Con la mesa de madera o de cristal. Con una silla o con cinco. Con una
+ventana, o sin ella. **Todas encajan con lo que dijiste.**
 
-Δ tiene que ser **no vacío** porque una teoría sobre un mundo donde no hay nada no
-sirve de mucho.
+Cada una de esas habitaciones imaginadas es lo que la lógica llama un **modelo**:
+una manera concreta de que todo lo que dijiste sea verdad.
 
-**El vocabulario V son las palabras que te dejas usar.** Tú decides cuáles. Por
-ejemplo tres: la palabra `EsPera`, la palabra `EsManzana`, y el nombre propio
-`mi_favorita`.
+Las tres piezas raras de la tabla de arriba son solo las partes de esa habitación
+imaginada:
 
-Ojo: las palabras **todavía no significan nada**. `EsPera` es un ruido. Podría
-acabar significando «es roja» o «pesa más de 100 gramos». Que se llame `EsPera` es
-una comodidad tuya, y el razonador ni la mira.
+- **el conjunto de cosas que hay** — la mesa, la silla, lo que sea que haya dentro;
+- **las palabras que usas** — «mesa», «silla», «junto a»;
+- **a qué apunta cada palabra** — cuál de las cosas es la mesa, cuáles parejas de
+  cosas están «junto a» otra.
 
-**La interpretación es apuntar con el dedo: qué palabra señala a qué cosa.** Y
-tiene una regla por cada tipo de palabra:
-
-| Tipo de palabra | A qué apunta | Ejemplo |
-|---|---|---|
-| **Constante** (un nombre propio) | a **una** cosa del frutero | `mi_favorita` → 🍐₁ |
-| **Relación de 1 hueco** (una propiedad) | a un **grupo** de cosas | `EsPera` → { 🍐₁, 🍐₂ } |
-| **Relación de 2 huecos** | a un grupo de **parejas** | `estáAlLadoDe` → { (🍐₁,🍎₁), (🍎₁,🍐₂) } |
-
-Eso, y nada más, es lo que quiere decir la frase fea *«a cada relación n-aria, un
-subconjunto de Δⁿ»*. «n-aria» = con n huecos. Δ² son todas las parejas posibles que
-puedes formar con las cosas del frutero, y la relación se queda con algunas.
-
-**Estructura M = el frutero + el apuntar con el dedo.** Un mundo concreto, entero,
-sin ambigüedad. Nada de «depende».
-
-**Ahora escribes una frase** (`φ`), usando solo tus palabras:
-
-> *«Todo lo que es pera está al lado de algo que es manzana.»*
-
-Y la miras en tu frutero. ¿Se cumple? 🍐₁ está al lado de 🍎₁ ✓. Pero 🍐₂ — nadie
-dijo que esté al lado de una manzana ✗. Luego la frase es **falsa** en este frutero.
-
-**`M ⊨ φ` se lee «en este frutero, esa frase sale verdadera».** El símbolo `⊨` es
-un «aquí se cumple». Aquí no se cumple, así que escribiríamos `M ⊭ φ`.
-
-**Un modelo** es un frutero donde salen verdaderas **todas** tus frases a la vez.
-Si mueves 🍐₂ al lado de la manzana, ese nuevo frutero sí es un modelo de tu frase.
+Y ya está. Una habitación imaginada = las cosas + qué nombre lleva cada una.
 
 ---
 
-**Y ahora lo importante, que es de dónde viene todo el lío.**
+**Lo importante viene ahora.**
 
-`T ⊨ α` no habla de *tu* frutero. Dice:
+Le preguntas a esa persona: *«¿la silla es de madera?»*
 
-> *«En **absolutamente todos** los fruteros donde mis frases salen verdaderas,
-> también sale verdadera α.»*
+Y te responde: **«no lo sé»**. No porque sea tonta, sino porque puede imaginarse una
+habitación con silla de madera y otra con silla de plástico, y **las dos encajan con
+lo que le contaste**.
 
-Fruteros con dos peras, con mil, con peras que además son manzanas si nadie lo ha
-prohibido, con fruta que no has visto nunca. **Todos.**
+Para que pueda contestarte que sí, tendría que ser de madera en **todas** las
+habitaciones que puede imaginar. En todas, sin excepción.
 
-Por eso el razonador te lleva la contraria tanto. Tú piensas en el frutero de tu
-cocina; él revisa todos los fruteros imaginables que encajen con lo que escribiste.
-Y le basta encontrar **uno solo** donde `α` falle para decirte que no se deduce.
+Eso es lo único que quiere decir la frase «se sigue de la teoría»:
 
-Eso es exactamente lo que pasó con el impala unas líneas más abajo. Tú tenías en la
-cabeza el frutero donde todos los impalas son herbívoros. El razonador encontró otro
-—impalas que ningún león se come y no son herbívoros— que también encaja con lo
-escrito. Con eso basta.
+> es cierto en **todas** las situaciones que encajan con lo que escribiste, no solo
+> en la que tú tenías en la cabeza.
 
-**Moraleja:** cuando el razonador no deduce algo «evidente», no está roto. Está
-diciéndote *«existe un frutero que encaja con tus reglas y donde eso es falso»*. Y
-casi siempre tiene razón: te faltaba escribir una regla.
+---
+
+**Y por eso el razonador te lleva la contraria.**
+
+Tú describes tu ontología pensando en tu habitación. Él se imagina todas las
+habitaciones posibles que encajan con tu descripción. Si encuentra **una sola** donde
+tu conclusión falle, te dice que no se sigue.
+
+Es exactamente lo que pasó con el impala en el capítulo 1. Tú te imaginabas el
+mundo donde todos los impalas son herbívoros. El razonador se imaginó otro —con
+impalas que ningún león se come, y que no son herbívoros— que también encajaba con
+lo escrito. Con encontrar ese, ya no lo deduce.
+
+**Cuando el razonador no deduce algo obvio, no está roto.** Te está diciendo: *«me
+puedo imaginar una situación que cumple tus reglas y donde eso es falso»*. Y casi
+siempre significa lo mismo — te faltó escribir una regla.
+
+</details>
+
+<details class="peras">
+<summary>La versión formal, para cuando haga falta citarla</summary>
+
+Las definiciones tal cual las da §2.1.2:
+
+| Pieza | Definición |
+|---|---|
+| **Vocabulario** `V` | un conjunto de símbolos de función, relación y constante (Def. 2.5) |
+| **`V`-estructura** `M` | un conjunto no vacío `Δ` más una interpretación de `V`: a cada constante le asigna un elemento de `Δ`; a cada relación de `n` huecos, un subconjunto de `Δⁿ` — o sea, qué grupos de `n` cosas cumplen esa relación (Def. 2.6) |
+| **Modelo de `Γ`** | una `V`-estructura que modela cada sentencia de `Γ` (Def. 2.9) |
+| **Teoría de `M`** | el conjunto de todas las `V`-sentencias verdaderas en `M` (Def. 2.8) |
+| **Teoría completa** | para toda sentencia, contiene esa sentencia o su negación, pero no ambas (Def. 2.10) |
+
+`M ⊨ φ` se lee «`M` es un modelo de `φ`»: la sentencia `φ` es verdadera en esa
+estructura.
 
 </details>
 

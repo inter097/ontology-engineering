@@ -101,51 +101,53 @@ Mira los dos cuantificadores de esa única línea:
 ```
 
 <details class="peras">
-<summary>¿Y esos símbolos? Explicado con peras y manzanas</summary>
+<summary>¿Y esos símbolos? Sin jerga</summary>
 
-Olvida los símbolos un momento. Imagina que tienes un frutero y quieres describir a
-alguien qué come tu mascota.
+Solo hay dos, y la diferencia entre ellos es la que rompe ontologías.
 
-**`∃come.Pera`** — «come **alguna** pera». Es una **promesa de que existe**. Si
-dices esto, te comprometes a que haya al menos una pera comida por ahí. Si tu
-mascota no ha comido nada en su vida, la frase es **falsa**.
+Piensa en un amigo vegetariano.
 
-**`∀come.Pera`** — «come **solo** peras». Ojo, que no dice lo que parece. No dice
-«come peras». Dice **«no come nada que no sea pera»**. Es una prohibición, no una
-promesa.
+**«Come verdura»** — te está diciendo que hay verdura de por medio. Si lleva tres
+días sin probar bocado, la frase es falsa. Esto es el símbolo **`∃`**.
 
-Y ahí está la trampa: **una piedra cumple `∀come.Pera`**. Una piedra no come nada,
-así que es literalmente cierto que «no come nada que no sea pera». No hay ningún
-contraejemplo, luego la frase es verdadera. A esto se le llama que se cumple **de
-forma vacía**.
+**«No come otra cosa que verdura»** — esto no dice que coma. Dice qué **no** hace.
+Es una prohibición. Esto es el símbolo **`∀`**.
 
-| Lo que quieres decir | Lo que hay que escribir |
+Y aquí está el detalle que lo cambia todo:
+
+> Si tu amigo lleva tres días **sin comer nada**, sigue siendo verdad que «no come
+> otra cosa que verdura». No hay nada que le puedas reprochar.
+
+De hecho, por la misma razón, también es verdad que «no come otra cosa que carne».
+Y que «no come otra cosa que piedras». **Todas son verdad a la vez**, porque no hay
+ningún contraejemplo.
+
+Suena a truco de abogado, y lo es. Pero el razonador razona así, y por eso:
+
+| Lo que quieres decir | Hace falta |
 |---|---|
-| «come peras» | `∃come.Pera` |
-| «no come otra cosa que peras» | `∀come.Pera` |
-| «come peras y nada más» | `∃come.Pera ⊓ ∀come.Pera` — **las dos juntas** |
+| «come verdura» | `∃` |
+| «no come otra cosa» | `∀` |
+| «come verdura y nada más» | **los dos juntos** |
 
-La tercera fila es la que casi nadie escribe, y es casi siempre la que hacía falta.
+La tercera fila es la que casi nadie escribe. Y es casi siempre la que hacía falta.
 
-Los otros dos símbolos que salen en esta página:
+---
 
-- **`⊑`** se lee «es un tipo de». `lion ⊑ animal` = todo león es un animal.
-- **`⊓`** se lee «y». `Impala ⊓ herbivore` = las cosas que son impala **y** además
-  herbívoro.
-- **`⊥`** se lee «imposible, no puede existir». `carnivore ⊓ herbivore ⊑ ⊥` = nada
-  puede ser carnívoro y herbívoro a la vez.
+Los otros tres símbolos de esta página son más fáciles:
 
-Con eso ya se lee la línea del león entera:
+- **`⊑`** = «es un tipo de». `lion ⊑ animal` — un león es un tipo de animal.
+- **`⊓`** = «y a la vez».
+- **`⊥`** = «imposible».
+
+Con eso ya se lee entera la línea del león:
 
 ```
 lion ⊑ ∀eats.herbivore ⊓ ∃eats.Impala
 ```
 
-> «Todo león **es de tal tipo que**: no come nada que no sea herbívoro, **y** come
-> al menos un impala.»
-
-Si quieres la versión larga de por qué esto importa tanto, está en el
-[capítulo 2](/capitulos/02-logica-primer-orden/), con frutero incluido.
+> «Un león es un animal que **no come otra cosa que** herbívoros, **y** que **sí
+> come** algún impala.»
 
 </details>
 
