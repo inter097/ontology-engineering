@@ -2,7 +2,7 @@
 titulo: 'Introduction: qué es una ontología y por qué no es una base de datos'
 capitulo: 1
 descripcion: 'El capítulo que fija el vocabulario. Cuatro definiciones, la hipótesis de mundo abierto, y un error semántico real en la ontología de ejemplo del propio libro — comprobado con un razonador.'
-keet: 'cap. 1 (Introduction), §1.1–1.5 y §1.E'
+keet: 'cap. 1 (Introduction), §1.1–1.5'
 ---
 
 El capítulo 1 no enseña a construir nada. Fija el vocabulario y responde una sola
@@ -14,7 +14,7 @@ va comprimido; lo que muerde, extendido.
 
 ## Las definiciones, rápido
 
-Cuatro, en orden histórico, cada una arreglando a la anterior (§1.3):
+Cuatro, en orden histórico, cada una arreglando a la anterior (§1.2.1, «The definition game»):
 
 | Definición | Problema |
 |---|---|
@@ -82,7 +82,7 @@ sencillamente incorrecto.
 La trampa que más caro sale en OWL, y la que hace posible el caso de estudio de más
 abajo.
 
-En §1.2 aparece la **African Wildlife Ontology (AWO)**, el ejemplo que atraviesa
+En §1.1 aparece la **African Wildlife Ontology (AWO)**, el ejemplo que atraviesa
 todo el libro, con un mismo axioma escrito de cuatro maneras —*los leones comen
 solo herbívoros, y comen algún impala*—:
 
@@ -273,7 +273,7 @@ giraffe.is_a.append(eats.some(leaf))     # las jirafas comen alguna hoja
 ## Qué deja el caso
 
 1. **El razonador comprueba coherencia, no verdad.** Precisión baja, en la matriz de
-   §1.3: se admiten modelos no pretendidos y todos son perfectamente consistentes.
+   §1.2.3: se admiten modelos no pretendidos y todos son perfectamente consistentes.
 2. **Bajo OWA los errores se esconden hasta que llegan los datos.** El mundo abierto
    absorbe modelado defectuoso durante todo el desarrollo y lo devuelve en
    producción, cuando alguien afirma algo negativo o cerrado. Probar la TBox sola no
@@ -290,7 +290,7 @@ giraffe.is_a.append(eats.some(leaf))     # las jirafas comen alguna hoja
 
 ## Para qué sirven, sin humo
 
-§1.4, comprimido:
+§1.3, comprimido:
 
 | Uso | Ejemplo del libro |
 |---|---|
@@ -315,11 +315,13 @@ saberlo antes de enamorarse del tema.
 
 ---
 
-## Los ejercicios (§1.E)
+## Los ejercicios (§1.5)
 
+El libro trae dos series distintas por capítulo y conviene no mezclarlas al
+citar: **Review question N.x** (conceptuales) y **Exercise N.x** (prácticos).
 Enunciados citados literal; resolución propia.
 
-**1.** *«…describe them in your own words, in particular: ontology-driven
+**Review question 1.1.** *«…describe them in your own words, in particular: ontology-driven
 information system, Ontology, ontology, and ontology engineering.»*
 
 **ontology-driven information system**: la ontología no es documentación adjunta,
@@ -329,10 +331,10 @@ con un glosario. **Ontology / ontology / ontology engineering**: ya arriba; la
 tercera es la disciplina de construir, evaluar y mantener el artefacto — la palabra
 *engineering* está puesta en oposición a modelar por intuición.
 
-**2.** *«List several uses of ontologies.»* → la tabla de la sección anterior.
+**Review question 1.2.** *«List several uses of ontologies.»* → la tabla de la sección anterior.
 
-**3.** *«Describe the difference between schema vs. instance-level data
-integration.»*
+**Review question 1.3.** *«Describe the difference between schema vs.
+instance-level data integration.»*
 
 | | Esquema | Instancia |
 |---|---|---|
@@ -341,14 +343,14 @@ integration.»*
 | Ontología típica | rica en axiomas | vocabulario controlado ligero |
 | Ejemplo | fusión de dos hospitales | Gene Ontology |
 
-**4.** *«…install an ODE, such as Protégé, load the AfricanWildlifeOntology1.owl…
+**Exercise 1.1.** *«…install an ODE, such as Protégé, load the AfricanWildlifeOntology1.owl…
 and open it in your text editor.»*
 
 El archivo está en
 [`artefactos/AfricanWildlifeOntology1.owl`](https://github.com/inter097/ontology-engineering/blob/main/capitulos/01-introduccion/artefactos/AfricanWildlifeOntology1.owl).
 En el editor de texto es RDF/XML, verboso hasta lo cómico: «cada león come solo
 herbívoros» ocupa una decena de líneas anidadas, y un `∀` es un `owl:Restriction`
-con `owl:allValuesFrom`. Justo lo que decía §1.2 — la sintaxis de intercambio está
+con `owl:allValuesFrom`. Justo lo que decía §1.1 — la sintaxis de intercambio está
 hecha para máquinas. Inventario contado sobre el XML:
 
 ```
@@ -365,7 +367,7 @@ Un detalle que salta a la vista: la mereología está mejor cuidada que el resto
 `is-proper-part-of` subpropiedad suya e **irreflexiva** — que es la manera correcta
 de distinguir parte de parte propia.
 
-**5.** *«…is it a good, less good, bad, or even worse ontology? Why?»*
+**Exercise 1.2.** *«…is it a good, less good, bad, or even worse ontology? Why?»*
 
 **Menos buena**: precisión baja, cobertura razonable. Además del defecto del caso de
 estudio:

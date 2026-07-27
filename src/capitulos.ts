@@ -1,6 +1,7 @@
-// Numeración verificada contra el índice del autor. La que circula suele estar
-// corrida +1 porque cuenta "How to Use the Book" como capítulo 1 — LibreTexts, por
-// ejemplo, publica el capítulo 1 (Introduction) bajo la URL ".../02%3A_...".
+// Numeración verificada contra el índice del PDF en /libro. La que circula suele
+// estar corrida +1: LibreTexts cuenta "How to Use the Book" como capítulo 1 y
+// además inserta un "Prelude" al principio de cada capítulo, así que también
+// corre las SECCIONES. Citar siempre contra /libro/OEbook.txt, no contra la web.
 // La 2ª edición coincide hasta el 9 y difiere a partir del 10.
 export interface Capitulo {
   n: number;
@@ -20,6 +21,7 @@ export const CAPITULOS: Capitulo[] = [
   { n: 7, titulo: 'Bottom-up Ontology Development', slug: '07-bottom-up' },
   { n: 8, titulo: 'Ontology-Based Data Access', slug: '08-obda' },
   { n: 9, titulo: 'Ontologies and Natural Languages', slug: '09-lenguaje-natural' },
-  { n: 10, titulo: 'Advanced Modeling with Additional Language Features', slug: '10-modelado-avanzado' },
+  { n: 10, titulo: 'Advanced Modelling with Additional Language Features', slug: '10-modelado-avanzado' },
+  { n: 11, titulo: 'Ontology modularisation', slug: '11-modularizacion' },
 ];
 
