@@ -88,16 +88,48 @@ se sabe de inmediato.
 
 ## Estructura
 
+Los capítulos son la fuente única: el mismo Markdown se lee en GitHub y genera el
+sitio en **[ontologias.eliuth.dev](https://ontologias.eliuth.dev)**. Nada se duplica.
+
 ```
 .
-├── ontology/           # los archivos .owl / .ttl
-├── queries/            # preguntas de competencia formalizadas
-├── docs/               # decisiones de modelado, cada una citada
+├── capitulos/
+│   └── NN-nombre/
+│       ├── resumen.md          # qué dice el libro
+│       ├── ejercicios.md       # los del libro, resueltos paso a paso
+│       ├── caso-de-estudio.md  # el cierre: algo verificable, no un programa
+│       └── artefactos/         # .owl, scripts de verificación, requirements
+├── src/                        # el sitio (Astro): layout, páginas, índice global
 └── README.md
 ```
 
-Pendiente de definir: dominio de la ontología, alcance y preguntas de competencia
-iniciales — que es justamente por donde manda empezar el capítulo 5.
+Cada capítulo cierra con un **caso de estudio**: no un ejercicio más, sino un
+problema donde lo del capítulo se aplica a algo que un razonador puede confirmar o
+desmentir. El del capítulo 1 encuentra un error semántico real en la ontología de
+ejemplo del propio libro.
+
+### Comandos
+
+```bash
+npm install
+npm run dev      # sitio en local
+npm run build    # build estático a dist/
+
+# verificar los artefactos de un capítulo (necesita Java en el PATH)
+cd capitulos/01-introduccion/artefactos
+python3 -m venv .venv && ./.venv/bin/pip install -r requirements.txt
+./.venv/bin/python verificar.py
+```
+
+## Estado
+
+| Capítulo | Estado |
+|---|---|
+| 1 — Introduction | resumen · ejercicios · caso de estudio |
+| 2–10 | pendientes |
+
+Pendiente de definir: dominio de la ontología propia, alcance y preguntas de
+competencia iniciales — que es justamente por donde manda empezar el capítulo 5.
 
 ---
 

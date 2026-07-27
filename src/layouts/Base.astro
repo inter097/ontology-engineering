@@ -1,0 +1,38 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  titulo: string;
+  descripcion?: string;
+}
+
+const { titulo, descripcion } = Astro.props;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titulo}</title>
+    {descripcion && <meta name="description" content={descripcion} />}
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  </head>
+  <body>
+    <nav class="top">
+      <div class="wrap">
+        <a href="/" class="marca">ingeniería de ontologías</a>
+        <a href="/capitulos/">capítulos</a>
+        <a href="https://people.cs.uct.ac.za/~mkeet/OEbook/">el libro</a>
+        <a href="https://github.com/inter097/ontology-engineering">repo</a>
+      </div>
+    </nav>
+    <main class="wrap">
+      <slot />
+      <footer>
+        Cada decisión de modelado citada contra Keet, C.M. <i>An Introduction to
+        Ontology Engineering</i>, v1.5 (2020). Lo que no tiene respaldo en el libro
+        se marca como criterio propio.
+      </footer>
+    </main>
+  </body>
+</html>

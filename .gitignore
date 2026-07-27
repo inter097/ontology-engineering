@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+.venv/
+.vercel/
+.DS_Store
+*.log

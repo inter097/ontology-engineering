@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { CAPITULOS, ORDEN_SECCIONES, NOMBRE_SECCION } from '../../capitulos';
+
+const entradas = await getCollection('capitulos');
+---
+
+<Base
+  titulo="Capítulos — Ingeniería de ontologías"
+  descripcion="Índice de capítulos del libro de Keet con resumen, ejercicios y caso de estudio."
+>
+  <h1>Capítulos</h1>
+  <p class="lead">
+    Numeración del autor. Cada capítulo publicado tiene resumen, ejercicios
+    resueltos y un caso de estudio.
+  </p>
+
+  {
+    CAPITULOS.map((cap) => {
+      const secciones = entradas
+        .filter((e) => e.data.capitulo === cap.n)
+        .sort(
+          (a, b) =>
+            ORDEN_SECCIONES.indexOf(a.data.seccion) -
+            ORDEN_SECCIONES.indexOf(b.data.seccion),
+        );
+      return (
+        <div class="capitulo">
+          <h2>
+            {cap.n}. {cap.titulo}
+          </h2>
+          {secciones.length > 0 ? (
+            <ul class="secciones">
+              {secciones.map((s) => (
+                <li>
+                  <a href={`/capitulos/${s.id}/`}>
+                    {NOMBRE_SECCION[s.data.seccion]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="pendiente">pendiente</p>
+          )}
+        </div>
+      );
+    })
+  }
+</Base>
