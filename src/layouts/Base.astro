@@ -16,23 +16,71 @@ const { titulo, descripcion } = Astro.props;
     <title>{titulo}</title>
     {descripcion && <meta name="description" content={descripcion} />}
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta name="color-scheme" content="light dark" />
+    {/* Se aplica antes de pintar para que no haya destello al cargar. */}
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem('tema');
+          if (t === 'light' || t === 'dark') {
+            document.documentElement.setAttribute('data-theme', t);
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+
     <nav class="top">
       <div class="wrap">
         <a href="/" class="marca">ingeniería de ontologías</a>
         <a href="/capitulos/">capítulos</a>
         <a href="https://people.cs.uct.ac.za/~mkeet/OEbook/">el libro</a>
         <a href="https://github.com/inter097/ontology-engineering">repo</a>
+        <button
+          class="tema"
+          type="button"
+          id="tema"
+          aria-label="Cambiar entre tema claro y oscuro"
+        >
+          tema
+        </button>
       </div>
     </nav>
-    <main class="wrap">
-      <slot />
-      <footer>
-        Cada decisión de modelado citada contra Keet, C.M. <i>An Introduction to
-        Ontology Engineering</i>, v1.5 (2020). Lo que no tiene respaldo en el libro
-        se marca como criterio propio.
-      </footer>
+
+    <main id="contenido">
+      <div class="wrap">
+        <slot />
+        <footer class="pie">
+          Cada decisión de modelado citada contra Keet, C.M. <i>An Introduction to
+          Ontology Engineering</i>, v1.5 (2020) — copia en
+          <a href="https://github.com/inter097/ontology-engineering/tree/main/libro">/libro</a>.
+          Lo que no tiene respaldo en el libro se marca como criterio propio.
+        </footer>
+      </div>
     </main>
+
+    <script is:inline>
+      (function () {
+        var boton = document.getElementById('tema');
+        if (!boton) return;
+        var raiz = document.documentElement;
+        boton.addEventListener('click', function () {
+          var actual = raiz.getAttribute('data-theme');
+          if (!actual) {
+            // sin preferencia explícita: partimos de lo que dice el sistema
+            actual = window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+          }
+          var nuevo = actual === 'dark' ? 'light' : 'dark';
+          raiz.setAttribute('data-theme', nuevo);
+          try {
+            localStorage.setItem('tema', nuevo);
+          } catch (e) {}
+        });
+      })();
+    </script>
   </body>
 </html>

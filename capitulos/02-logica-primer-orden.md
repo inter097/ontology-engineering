@@ -3,6 +3,14 @@ titulo: 'First order logic: por qué el razonador no adivina'
 capitulo: 2
 descripcion: 'Sintaxis, semántica y las tres formas de inferir. El capítulo explica lo que quedó abierto en el 1: aquella inferencia sobre el impala no era un fallo del razonador, era una abducción disfrazada de deducción.'
 keet: 'cap. 2 (First order logic and automated reasoning in a nutshell), §2.1–2.3'
+hallazgo: 'Aquella inferencia sobre el impala nunca fue una deducción: es una abducción, y hay otra hipótesis más débil que explica lo mismo.'
+cifras:
+  - valor: '3'
+    etiqueta: 'formas de inferir'
+  - valor: '1'
+    etiqueta: 'que hace el razonador'
+  - valor: '8'
+    etiqueta: 'comprobaciones'
 ---
 
 El capítulo 2 es la maquinaria. No hay ontologías aquí: hay lógica de primer orden,
@@ -201,6 +209,10 @@ Se prueban dos afirmaciones por refutación:
 [ok] T ∪ {¬α} INCONSISTENTE  con α = lion ⊑ ∃eats.(Impala ⊓ herbivore)
 [ok] T ∪ {¬α} CONSISTENTE    con α = Impala ⊑ herbivore
 ```
+
+<p class="evidencia">T ⊨ lion ⊑ ∃eats.(Impala ⊓ herbivore)</p>
+
+<p class="evidencia hipotesis">T ⊭ Impala ⊑ herbivore — abducción, no deducción</p>
 
 La primera **sí** se deduce. La segunda **no**, y ahora hay una prueba formal, no
 una observación de que «el razonador no lo sacó».

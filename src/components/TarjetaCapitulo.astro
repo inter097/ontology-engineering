@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Capitulo } from '../capitulos';
+
+interface Props {
+  cap: Capitulo;
+  entrada?: CollectionEntry<'capitulos'>;
+}
+
+const { cap, entrada } = Astro.props;
+const url = entrada ? `/capitulos/${entrada.id}/` : undefined;
+---
+
+<article class:list={['tarjeta', !entrada && 'pendiente']}>
+  <div class="tarjeta-num">{cap.propio ? '00' : String(cap.n).padStart(2, '0')}</div>
+
+  <div>
+    <h2>
+      {url ? <a href={url}>{cap.titulo}</a> : <span>{cap.titulo}</span>}
+    </h2>
+
+    <p class="fuente">
+      {
+        entrada
+          ? cap.propio
+            ? 'página propia — no es del libro'
+            : `Keet, ${entrada.data.keet}`
+          : 'pendiente'
+      }
+    </p>
+
+    {
+      entrada?.data.hallazgo && (
+        <p class="hallazgo">{entrada.data.hallazgo}</p>
+      )
+    }
+
+    {
+      entrada?.data.cifras && (
+        <dl class="cifras">
+          {entrada.data.cifras.map((c) => (
+            <div>
+              <dt>{c.etiqueta}</dt>
+              <dd>{c.valor}</dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
+
+    {!entrada && <p><span class="sello-pendiente">sin escribir</span></p>}
+  </div>
+</article>

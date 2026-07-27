@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import TarjetaCapitulo from '../../components/TarjetaCapitulo.astro';
 import { CAPITULOS } from '../../capitulos';
 
 const entradas = await getCollection('capitulos');
@@ -9,34 +10,20 @@ const porCapitulo = new Map(entradas.map((e) => [e.data.capitulo, e]));
 
 <Base
   titulo="Capítulos — Ingeniería de ontologías"
-  descripcion="Índice de capítulos del libro de Keet."
+  descripcion="Índice de capítulos del libro de Keet, con el hallazgo y las cifras de cada uno."
 >
-  <h1>Capítulos</h1>
-  <p class="lead">Numeración del autor. Una página por capítulo.</p>
+  <p class="meta">Índice</p>
+  <h1 class="medida">Capítulos</h1>
+  <p class="lead">
+    Numeración de la autora, verificada contra el PDF. La que circula suele estar
+    corrida +1. Una página por capítulo.
+  </p>
 
-  {
-    CAPITULOS.map((cap) => {
-      const entrada = porCapitulo.get(cap.n);
-      return (
-        <div class="capitulo">
-          <h2>
-            {entrada ? (
-              <a href={`/capitulos/${entrada.id}/`}>
-                {cap.n}. {cap.titulo}
-              </a>
-            ) : (
-              <span>
-                {cap.n}. {cap.titulo}
-              </span>
-            )}
-          </h2>
-          {entrada ? (
-            <p>{entrada.data.descripcion}</p>
-          ) : (
-            <p class="pendiente">pendiente</p>
-          )}
-        </div>
-      );
-    })
-  }
+  <div class="rejilla-capitulos">
+    {
+      CAPITULOS.map((cap) => (
+        <TarjetaCapitulo cap={cap} entrada={porCapitulo.get(cap.n)} />
+      ))
+    }
+  </div>
 </Base>

@@ -14,6 +14,13 @@ const capitulos = defineCollection({
     capitulo: z.number(),
     descripcion: z.string(),
     keet: z.string().describe('capítulo/secciones de Keet que cubre'),
+    /** una frase con el hallazgo del capítulo, para la tarjeta del índice */
+    hallazgo: z.string().optional(),
+    /** dos o tres cifras del capítulo: lo que se contó o se comprobó */
+    cifras: z
+      .array(z.object({ valor: z.string(), etiqueta: z.string() }))
+      .max(3)
+      .optional(),
   }),
 });
 

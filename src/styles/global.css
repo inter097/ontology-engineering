@@ -1,185 +1,666 @@
+/* =========================================================================
+   Cuaderno de ingeniería de ontologías
+   -------------------------------------------------------------------------
+   Papel de trazado, no papel de libro. El neutro tiene sesgo frío hacia el
+   acento (azul prusia): un gris puro se ve sin decidir.
+
+   El motivo estructural es la REGLA DE MUNDO ABIERTO — tramo sólido, punto,
+   continuación punteada sin tope. Dice la tesis del cuaderno: lo que no está
+   escrito no es falso, es desconocido. Es lo contrario de una marca de
+   intervalo, que cierra por los dos lados.
+
+   Contrastes verificados contra ambas superficies antes de fijarlos.
+   ========================================================================= */
+
 :root {
-  --bg: #fbfaf7;
-  --fg: #1b1a17;
-  --muted: #6b675e;
-  --line: #e2ded4;
-  --accent: #7a4a1f;
-  --code-bg: #f2efe8;
-  --max: 46rem;
+  /* --- claro --- */
+  --papel: #eef1f4;
+  --papel-alto: #f8fafb;
+  --tinta: #10171f;        /* 15.9:1 */
+  --apagado: #56616e;      /*  5.6:1 */
+  --linea: #d3dae1;
+  --acento: #12496e;       /*  8.4:1 */
+  --acento-tenue: #12496e1a;
+
+  /* divergente: probado ↔ hipotético. Centro gris neutro = "nada". */
+  --frio: #1d6f8e;
+  --centro: #787e85;
+  --calido: #9c6a15;
+
+  /* tipografía: tres papeles */
+  --serif: Charter, 'Bitstream Charter', 'Iowan Old Style', 'Sitka Text',
+    Palatino, ui-serif, Georgia, serif;
+  --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    system-ui, sans-serif;
+  --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+
+  --medida: 68ch;
+  --banda: 82ch;   /* los artefactos rompen la medida */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #14140f;
-    --fg: #e9e5da;
-    --muted: #9b968a;
-    --line: #2e2c25;
-    --accent: #d9a05b;
-    --code-bg: #1e1d17;
+    /* diseñado aparte, no invertido: superficie azul-pizarra, acento MÁS claro */
+    --papel: #0f151b;
+    --papel-alto: #161e26;
+    --tinta: #dde5ec;      /* 14.4:1 */
+    --apagado: #8d99a6;    /*  6.3:1 */
+    --linea: #26303a;
+    --acento: #79b3e0;     /*  8.2:1 */
+    --acento-tenue: #79b3e01f;
+    --frio: #5fb3d4;
+    --centro: #9aa0a6;
+    --calido: #d9a441;
   }
 }
 
-* { box-sizing: border-box; }
+/* El botón de tema estampa data-theme en la raíz y gana en los dos sentidos. */
+:root[data-theme='light'] {
+  --papel: #eef1f4;
+  --papel-alto: #f8fafb;
+  --tinta: #10171f;
+  --apagado: #56616e;
+  --linea: #d3dae1;
+  --acento: #12496e;
+  --acento-tenue: #12496e1a;
+  --frio: #1d6f8e;
+  --centro: #787e85;
+  --calido: #9c6a15;
+}
+
+:root[data-theme='dark'] {
+  --papel: #0f151b;
+  --papel-alto: #161e26;
+  --tinta: #dde5ec;
+  --apagado: #8d99a6;
+  --linea: #26303a;
+  --acento: #79b3e0;
+  --acento-tenue: #79b3e01f;
+  --frio: #5fb3d4;
+  --centro: #9aa0a6;
+  --calido: #d9a441;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 html {
-  font-family: ui-serif, Georgia, 'Iowan Old Style', serif;
-  background: var(--bg);
-  color: var(--fg);
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--sans);
   -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
   font-size: 1.0625rem;
-  line-height: 1.65;
+  line-height: 1.62;
+  overflow-x: hidden; /* el body nunca se desplaza de lado */
 }
+
+/* ---------- rejilla: columna de medida + raíl izquierdo de marcas ---------- */
 
 .wrap {
-  max-width: var(--max);
+  max-width: var(--banda);
   margin: 0 auto;
-  padding: 2rem 1.25rem 6rem;
+  padding: 0 1.5rem;
 }
 
-/* --- cabecera --- */
-.top {
-  border-bottom: 1px solid var(--line);
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.8rem;
+.medida {
+  max-width: var(--medida);
 }
-.top .wrap { padding-block: 1rem; display: flex; gap: 1.25rem; align-items: baseline; flex-wrap: wrap; }
-.top a { color: var(--muted); text-decoration: none; }
-.top a:hover { color: var(--accent); }
-.top .marca { color: var(--fg); font-weight: 600; }
 
-/* --- tipografía --- */
-h1, h2, h3 { line-height: 1.25; font-weight: 600; }
-h1 { font-size: 2rem; margin: 0 0 0.35rem; letter-spacing: -0.02em; }
-h2 { font-size: 1.35rem; margin: 2.75rem 0 0.75rem; }
-h3 { font-size: 1.1rem; margin: 2rem 0 0.5rem; }
+/* ---------- tipografía ---------- */
 
-a { color: var(--accent); text-underline-offset: 2px; }
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+  letter-spacing: -0.01em;
+}
 
-.lead { color: var(--muted); font-size: 1.1rem; margin: 0 0 2rem; }
+h1 {
+  font-size: clamp(1.9rem, 1.4rem + 2vw, 2.6rem);
+  margin: 0 0 0.6rem;
+}
+h2 {
+  font-size: 1.45rem;
+  margin: 3rem 0 0.9rem;
+}
+h3 {
+  font-size: 1.12rem;
+  margin: 2.2rem 0 0.6rem;
+}
+
+p,
+ul,
+ol {
+  max-width: var(--medida);
+}
+
+a {
+  color: var(--acento);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+strong {
+  font-weight: 650;
+}
+
+.lead {
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--apagado);
+  max-width: var(--medida);
+  margin: 0 0 2rem;
+}
+
+/* etiqueta mono en versalitas: el tercer papel tipográfico */
+.etiqueta,
+.meta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--apagado);
+}
 
 .meta {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  margin: 0 0 1.25rem;
+}
+
+/* ---------- el motivo: regla de mundo abierto ----------
+   sólido → punto → punteado que no cierra. No es adorno: es la tesis. */
+
+hr,
+.regla {
+  border: 0;
+  height: 7px;
+  margin: 3.5rem 0;
+  max-width: var(--banda);
+
+  background-image:
+    /* 1 · tramo sólido: lo afirmado */
+    linear-gradient(var(--linea), var(--linea)),
+    /* 2 · punto: el límite de lo que sabes */
+    radial-gradient(circle closest-side, var(--acento) 98%, transparent 100%),
+    /* 3 · continuación punteada, sin tope: lo no afirmado */
+    repeating-linear-gradient(
+      to right,
+      var(--linea) 0 2px,
+      transparent 2px 8px
+    );
+  background-size:
+    38% 1px,
+    5px 5px,
+    56% 1px;
+  background-position:
+    left center,
+    39% center,
+    right center;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+}
+
+/* ---------- cabecera ---------- */
+
+.top {
+  border-bottom: 1px solid var(--linea);
+  background: var(--papel);
+}
+
+.top .wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding-block: 1rem;
+  flex-wrap: wrap;
+}
+
+.top a {
+  font-family: var(--mono);
   font-size: 0.75rem;
-  color: var(--muted);
+  color: var(--apagado);
+  text-decoration: none;
+}
+
+.top a:hover {
+  color: var(--acento);
+  text-decoration: underline;
+}
+
+.top .marca {
+  color: var(--tinta);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-right: auto;
+}
+
+/* botón de tema */
+.tema {
+  font-family: var(--mono);
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin: 0 0 1.5rem;
+  background: none;
+  border: 1px solid var(--linea);
+  color: var(--apagado);
+  padding: 0.25rem 0.6rem;
+  cursor: pointer;
+  border-radius: 2px;
 }
 
-hr { border: 0; border-top: 1px solid var(--line); margin: 3rem 0; }
-
-blockquote {
-  margin: 1.5rem 0;
-  padding: 0.15rem 0 0.15rem 1.1rem;
-  border-left: 3px solid var(--line);
-  color: var(--muted);
+.tema:hover {
+  border-color: var(--acento);
+  color: var(--acento);
 }
 
-/* --- código --- */
-code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.86em;
-  background: var(--code-bg);
-  padding: 0.12em 0.35em;
-  border-radius: 3px;
+main {
+  padding-block: 2.5rem 6rem;
 }
-pre {
-  background: var(--code-bg);
-  padding: 1rem;
-  border-radius: 6px;
+
+/* ---------- foco visible en todo lo interactivo ---------- */
+
+:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.saltar {
+  position: absolute;
+  left: -9999px;
+}
+.saltar:focus {
+  position: static;
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--papel-alto);
+  border: 1px solid var(--acento);
+}
+
+/* ---------- tarjetas de capítulo ---------- */
+
+.rejilla-capitulos {
+  display: grid;
+  gap: 0;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--linea);
+}
+
+.tarjeta {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0 1.5rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--linea);
+}
+
+.tarjeta-num {
+  font-family: var(--mono);
+  font-size: 1.6rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--acento);
+  line-height: 1.1;
+}
+
+.tarjeta h2 {
+  font-size: 1.3rem;
+  margin: 0 0 0.2rem;
+}
+
+.tarjeta h2 a {
+  text-decoration: none;
+  color: var(--tinta);
+}
+.tarjeta h2 a:hover {
+  color: var(--acento);
+  text-decoration: underline;
+}
+
+.tarjeta .fuente {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--apagado);
+  margin: 0 0 0.7rem;
+}
+
+.tarjeta .hallazgo {
+  margin: 0 0 1rem;
+  max-width: 58ch;
+}
+
+/* pendientes: atenuadas y sin enlace */
+.tarjeta.pendiente .tarjeta-num,
+.tarjeta.pendiente h2 {
+  color: var(--apagado);
+  opacity: 0.55;
+}
+.tarjeta.pendiente .fuente {
+  opacity: 0.55;
+}
+
+.sello-pendiente {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--apagado);
+  border: 1px dashed var(--linea);
+  padding: 0.1rem 0.45rem;
+}
+
+/* ---------- fila de estadísticas ---------- */
+
+.cifras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  border-left: 1px solid var(--linea);
+  max-width: 34rem;
+}
+
+.cifras div {
+  border-right: 1px solid var(--linea);
+  padding: 0.5rem 0.9rem;
+}
+
+.cifras dt {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--apagado);
+  margin: 0 0 0.15rem;
+}
+
+.cifras dd {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.55rem;
+  line-height: 1.05;
+  /* cifras grandes con figuras proporcionales: no se alinean en columna */
+  font-variant-numeric: proportional-nums;
+}
+
+/* ---------- ficha de evidencia ----------
+   el equivalente aquí de "−0.036 RMSE" es el veredicto del razonador */
+
+.evidencia {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  background: var(--papel-alto);
+  border: 1px solid var(--linea);
+  border-left: 2px solid var(--frio);
+  padding: 0.4rem 0.7rem;
+  margin: 0.4rem 0;
+  max-width: 100%;
   overflow-x: auto;
-  font-size: 0.85rem;
-  line-height: 1.5;
 }
-pre code { background: none; padding: 0; font-size: inherit; }
 
-/* --- tablas: nunca desbordan el body --- */
-.tabla-scroll, .contenido table { display: block; overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; font-size: 0.92rem; margin: 1.5rem 0; }
-th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
-
-/* --- índice de capítulos --- */
-.capitulo {
-  border-top: 1px solid var(--line);
-  padding: 1.5rem 0;
+.evidencia::before {
+  content: '⊨';
+  color: var(--frio);
+  font-size: 0.95rem;
 }
-.capitulo h2 { margin: 0 0 0.3rem; font-size: 1.2rem; }
-.capitulo h2 a { text-decoration: none; }
-.capitulo p { margin: 0 0 0.75rem; color: var(--muted); }
-/* --- bloques «explicado con peras y manzanas» --- */
-details.peras {
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--accent);
-  border-radius: 4px;
-  background: var(--code-bg);
-  padding: 0 1rem;
+
+.evidencia.hipotesis {
+  border-left-color: var(--calido);
+}
+.evidencia.hipotesis::before {
+  content: '⊭';
+  color: var(--calido);
+}
+
+/* ---------- figuras ---------- */
+
+figure {
+  margin: 2.25rem 0;
+  border: 1px solid var(--linea);
+  background: var(--papel-alto);
+}
+
+figure > .cabecera {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--apagado);
+  padding: 0.55rem 1rem;
+  border-bottom: 1px solid var(--linea);
+}
+
+figure > .cuerpo {
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+figure > figcaption {
+  font-size: 0.88rem;
+  color: var(--apagado);
+  padding: 0.7rem 1rem;
+  border-top: 1px solid var(--linea);
+  max-width: none;
+}
+
+/* ---------- código y fórmulas ----------
+   las fórmulas lógicas son código: se leen carácter a carácter */
+
+code {
+  font-family: var(--mono);
+  font-size: 0.87em;
+  background: var(--acento-tenue);
+  padding: 0.1em 0.32em;
+  border-radius: 2px;
+}
+
+pre {
+  font-family: var(--mono);
+  background: var(--papel-alto);
+  border: 1px solid var(--linea);
+  border-left: 2px solid var(--linea);
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  font-size: 0.83rem;
+  line-height: 1.55;
+  max-width: var(--banda);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* ---------- dos tipos de tabla, con reglas distintas ---------- */
+
+.contenido table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.93rem;
   margin: 1.75rem 0;
 }
-details.peras > summary {
-  cursor: pointer;
-  padding: 0.85rem 0;
+
+/* de prosa: el texto fluye */
+.contenido table td,
+.contenido table th {
+  text-align: left;
+  padding: 0.5rem 0.85rem 0.5rem 0;
+  border-bottom: 1px solid var(--linea);
+  vertical-align: top;
+}
+
+.contenido table th {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--apagado);
   font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--accent);
+  border-bottom-color: var(--tinta);
+}
+
+/* de datos: no se parten, números a la derecha */
+.tabla-datos {
+  overflow-x: auto;
+  margin: 1.75rem 0;
+}
+.tabla-datos table {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+}
+.tabla-datos td,
+.tabla-datos th {
+  white-space: nowrap;
+}
+.tabla-datos td:not(:first-child),
+.tabla-datos th:not(:first-child) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* cualquier bloque ancho se desplaza dentro de sí mismo */
+.contenido > table {
+  display: block;
+  overflow-x: auto;
+}
+
+/* ---------- citas laterales para el matiz ---------- */
+
+blockquote {
+  margin: 1.75rem 0;
+  padding: 0.1rem 0 0.1rem 1.15rem;
+  border-left: 2px solid var(--acento);
+  color: var(--apagado);
+  max-width: var(--medida);
+}
+
+blockquote strong,
+blockquote b {
+  color: var(--tinta);
+}
+
+/* ---------- desplegables ---------- */
+
+details {
+  border: 1px solid var(--linea);
+  background: var(--papel-alto);
+  padding: 0 1.1rem;
+  margin: 2rem 0;
+  max-width: var(--banda);
+}
+
+details > summary {
+  cursor: pointer;
+  padding: 0.8rem 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--acento);
   list-style: none;
 }
-details.peras > summary::-webkit-details-marker { display: none; }
-details.peras > summary::before {
-  content: '▸';
-  display: inline-block;
-  width: 1.1em;
-  transition: transform 0.15s;
-}
-details.peras[open] > summary::before { transform: rotate(90deg); }
-details.peras[open] > summary { border-bottom: 1px solid var(--line); }
-details.peras > *:not(summary) { font-size: 0.97rem; }
-details.peras > *:last-child { margin-bottom: 1.1rem; }
 
-/* --- bloque «para la defensa»: mismo patrón, otro acento --- */
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary::before {
+  content: '+';
+  display: inline-block;
+  width: 1.2em;
+  font-weight: 600;
+}
+
+details[open] > summary::before {
+  content: '−';
+}
+
+details[open] > summary {
+  border-bottom: 1px solid var(--linea);
+  margin-bottom: 0.5rem;
+}
+
+details > *:last-child {
+  margin-bottom: 1.1rem;
+}
+
+/* peras = explicación en lenguaje llano · defensa = preguntas de tribunal */
+details.peras {
+  border-left: 2px solid var(--frio);
+}
+details.peras > summary {
+  color: var(--frio);
+}
+
 details.defensa {
-  border: 1px solid var(--line);
-  border-left: 3px solid #6b7f4a;
-  border-radius: 4px;
-  background: var(--code-bg);
-  padding: 0 1rem;
-  margin: 2.5rem 0 1rem;
+  border-left: 2px solid var(--calido);
+  margin-top: 3rem;
 }
 details.defensa > summary {
-  cursor: pointer;
-  padding: 0.85rem 0;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: #6b7f4a;
-  list-style: none;
-}
-details.defensa > summary::-webkit-details-marker { display: none; }
-details.defensa > summary::before {
-  content: '▸';
-  display: inline-block;
-  width: 1.1em;
-  transition: transform 0.15s;
-}
-details.defensa[open] > summary::before { transform: rotate(90deg); }
-details.defensa[open] > summary { border-bottom: 1px solid var(--line); }
-details.defensa > *:not(summary) { font-size: 0.97rem; }
-details.defensa > *:last-child { margin-bottom: 1.1rem; }
-
-@media (prefers-color-scheme: dark) {
-  details.defensa { border-left-color: #9cb36a; }
-  details.defensa > summary { color: #9cb36a; }
+  color: var(--calido);
 }
 
-.pendiente { color: var(--muted); font-style: italic; }
+/* ---------- errata: lo que salió mal ---------- */
 
-footer {
-  border-top: 1px solid var(--line);
-  margin-top: 4rem;
+.errata {
+  border: 1px dashed var(--linea);
+  border-left: 2px solid var(--calido);
+  background: var(--papel-alto);
+  padding: 1rem 1.15rem;
+  margin: 2rem 0;
+  max-width: var(--banda);
+}
+
+.errata > .etiqueta {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--calido);
+}
+
+.errata > *:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- pie ---------- */
+
+footer.pie {
+  border-top: 1px solid var(--linea);
+  margin-top: 4.5rem;
   padding-top: 1.5rem;
   font-size: 0.85rem;
-  color: var(--muted);
+  color: var(--apagado);
+  max-width: var(--medida);
+}
+
+/* ---------- movimiento ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 34rem) {
+  .tarjeta {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+  .tarjeta-num {
+    font-size: 1.1rem;
+  }
 }

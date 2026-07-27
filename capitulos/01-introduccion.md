@@ -3,6 +3,14 @@ titulo: 'Introduction: qué es una ontología y por qué no es una base de datos
 capitulo: 1
 descripcion: 'El capítulo que fija el vocabulario. Cuatro definiciones, la hipótesis de mundo abierto, y un error semántico real en la ontología de ejemplo del propio libro — comprobado con un razonador.'
 keet: 'cap. 1 (Introduction), §1.1–1.5'
+hallazgo: 'La ontología de ejemplo del propio libro pasa el razonador en verde y se cae al afirmar un individuo que no come nada.'
+cifras:
+  - valor: '31'
+    etiqueta: 'clases en la AWO'
+  - valor: '7'
+    etiqueta: 'axiomas de disyunción'
+  - valor: '12'
+    etiqueta: 'comprobaciones'
 ---
 
 El capítulo 1 no enseña a construir nada. Fija el vocabulario y responde una sola
@@ -250,6 +258,8 @@ brizna.is_a.append(eats.exactly(0, Thing))   # una brizna no come
 [ok] afirmar que una brizna de hierba no come vuelve INCONSISTENTE la ontología
 ```
 
+<p class="evidencia">HermiT · AWO1 + 1 individuo → inconsistente</p>
+
 Toda la ontología. No una clase insatisfacible: **inconsistente**, que es la avería
 total — a partir de ahí el razonador deriva cualquier cosa y ninguna respuesta
 sirve.
@@ -372,11 +382,22 @@ herbívoros» ocupa una decena de líneas anidadas, y un `∀` es un `owl:Restri
 con `owl:allValuesFrom`. Justo lo que decía §1.1 — la sintaxis de intercambio está
 hecha para máquinas. Inventario contado sobre el XML:
 
-```
-31 clases     5 propiedades de objeto    0 individuos
-50 rdfs:subClassOf    26 someValuesFrom (∃)    9 allValuesFrom (∀)
- 6 equivalentClass     7 axiomas de disyunción    2 rdfs:range    0 rdfs:domain
-```
+<div class="tabla-datos">
+
+| Construcción | Cuenta |
+|---|---|
+| clases | 31 |
+| propiedades de objeto | 5 |
+| individuos | 0 |
+| `rdfs:subClassOf` | 50 |
+| `someValuesFrom` (∃) | 26 |
+| `allValuesFrom` (∀) | 9 |
+| `equivalentClass` | 6 |
+| axiomas de disyunción | 7 |
+| `rdfs:range` | 2 |
+| `rdfs:domain` | 0 |
+
+</div>
 
 En Protégé, antes del razonador la jerarquía es plana y aburrida. Al pulsar «start
 reasoner» aparece lo interesante — que es el caso de estudio de arriba.
@@ -420,6 +441,23 @@ sería caer justo en la trampa que el capítulo acaba de explicar.
 4. Los errores **semánticos** no los detecta ninguna herramienta. Es lo que
    justifica escribir preguntas de competencia.
 5. Probar el esquema solo no basta. **Hay que probarlo contra individuos.**
+
+<div class="errata">
+<span class="etiqueta">Errata — lo que salió mal aquí</span>
+
+La primera versión de esta página citaba las secciones **corridas +1**: decía §1.2
+donde el libro dice §1.1, y numeraba los ejercicios 1–5 cuando el libro usa dos
+series, *Review question N.x* y *Exercise N.x*.
+
+La causa: se citó contra la edición de LibreTexts, que además de contar *«How to Use
+the Book»* como capítulo 1, **inserta una sección «Prelude» al principio de cada
+capítulo** — y eso corre también la numeración interna. Es exactamente el
+desplazamiento contra el que avisa este mismo capítulo.
+
+Se corrigió bajando el PDF de la autora a [`/libro`](https://github.com/inter097/ontology-engineering/tree/main/libro)
+y citando contra él. Ninguna afirmación técnica cambió; sí todas las referencias.
+
+</div>
 
 <small>Salvo los enunciados citados y la ontología de ejemplo, el análisis de esta
 página es criterio propio, verificado con HermiT. Numeración del autor: este es el

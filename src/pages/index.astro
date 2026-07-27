@@ -1,64 +1,58 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import TarjetaCapitulo from '../components/TarjetaCapitulo.astro';
 import { CAPITULOS } from '../capitulos';
 
 const entradas = await getCollection('capitulos');
 const porCapitulo = new Map(entradas.map((e) => [e.data.capitulo, e]));
+const hechos = entradas.length;
 ---
 
 <Base
-  titulo="Ingeniería de ontologías — recorrido por Keet"
-  descripcion="Capítulo a capítulo del libro de Keet: qué dice, los ejercicios resueltos y un caso de estudio verificable en cada uno."
+  titulo="Ingeniería de ontologías — cuaderno sobre Keet"
+  descripcion="Cuaderno de trabajo capítulo a capítulo sobre el libro de Keet. Cada capítulo cierra con un caso de estudio que un razonador confirma o desmiente."
 >
-  <h1>Ingeniería de ontologías</h1>
+  <p class="meta">Cuaderno de trabajo · {hechos} de 12 páginas</p>
+
+  <h1 class="medida">Ingeniería de ontologías</h1>
+
   <p class="lead">
     Un recorrido capítulo a capítulo por <i>An Introduction to Ontology
-    Engineering</i> de C. Maria Keet. Una página por capítulo: qué dice el libro,
-    los ejercicios resueltos, y un caso de estudio donde eso se aplica a algo que
-    se puede comprobar con un razonador.
+    Engineering</i>, de C. Maria Keet. Cada capítulo cierra con un caso de estudio
+    donde lo aprendido se aplica a algo que un razonador puede confirmar o
+    desmentir — y todo lo que se afirma aquí está comprobado por un script.
   </p>
+
+  <hr />
 
   <h2>El libro</h2>
   <p>
     Keet, C.M. <i>An Introduction to Ontology Engineering</i>, v1.5 (2020). Libro
-    abierto, gratuito, con material suplementario y ejercicios:
-    <a href="https://people.cs.uct.ac.za/~mkeet/OEbook/">página del libro</a> ·
-    <a href="https://people.cs.uct.ac.za/~mkeet/files/OEbook.pdf">PDF</a> ·
-    <a href="https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_and_Computation_Fundamentals/An_Introduction_to_Ontology_Engineering_(Keet)">LibreTexts</a>.
+    abierto, CC BY 4.0, con material suplementario y ejercicios:
+    <a href="https://people.cs.uct.ac.za/~mkeet/OEbook/">página de la autora</a> ·
+    <a href="https://github.com/inter097/ontology-engineering/tree/main/libro">copia en el repo</a>.
   </p>
   <p>
     Es un libro de texto de universidad, no una introducción divulgativa: da la
-    lógica formal detrás de OWL en vez de dar solo recetas de Protégé. Por eso
-    conviene como base — las decisiones quedan citables.
+    lógica formal detrás de OWL en vez de recetas de Protégé. Por eso sirve de
+    base — las decisiones quedan citables.
   </p>
 
+  <hr />
+
   <h2>Capítulos</h2>
-  <p>
-    El <a href="/capitulos/00-simbolos/">capítulo 0</a> no es del libro: explica los
-    símbolos y las cuatro ideas que hacen falta para leer el resto. Si la notación
-    lógica te resulta ajena, empieza ahí.
+  <p class="medida">
+    El <a href="/capitulos/00-simbolos/">capítulo 0</a> no es del libro: explica la
+    notación y las cuatro ideas que hacen falta para leer el resto. Si los símbolos
+    lógicos te resultan ajenos, empieza ahí.
   </p>
-  {
-    CAPITULOS.map((cap) => {
-      const entrada = porCapitulo.get(cap.n);
-      return (
-        <div class="capitulo">
-          <h2>
-            {entrada ? (
-              <a href={`/capitulos/${entrada.id}/`}>
-                {cap.n}. {cap.titulo}
-              </a>
-            ) : (
-              <span>
-                {cap.n}. {cap.titulo}
-              </span>
-            )}
-          </h2>
-          <p>{entrada ? entrada.data.descripcion : cap.nota ?? ''}</p>
-          {!entrada && <p class="pendiente">pendiente</p>}
-        </div>
-      );
-    })
-  }
+
+  <div class="rejilla-capitulos">
+    {
+      CAPITULOS.map((cap) => (
+        <TarjetaCapitulo cap={cap} entrada={porCapitulo.get(cap.n)} />
+      ))
+    }
+  </div>
 </Base>

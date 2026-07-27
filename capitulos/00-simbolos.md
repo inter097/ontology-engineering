@@ -3,6 +3,14 @@ titulo: 'Capítulo 0: los símbolos, antes de empezar'
 capitulo: 0
 descripcion: 'Por qué hay dos juegos de símbolos distintos, cómo se lee cada uno en voz alta, y las cuatro ideas que hay que tener claras antes del capítulo 1. Página propia, no del libro.'
 keet: 'ninguno — página propia, con enlaces a §2.1 y §3.1 donde el libro lo formaliza'
+hallazgo: 'Dos notaciones para lo mismo: la descriptiva es primer orden recortado para que el razonamiento siempre termine.'
+cifras:
+  - valor: '2'
+    etiqueta: 'juegos de símbolos'
+  - valor: '4'
+    etiqueta: 'ideas base'
+  - valor: '0'
+    etiqueta: 'capítulos del libro'
 ---
 
 Esta página no es del libro. Está aquí porque el libro da por sabidas cosas que

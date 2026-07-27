@@ -137,3 +137,37 @@ libro). Los demás capítulos **enlazan ahí** en vez de repetir la tabla.
 
 **Markdown dentro de `<details>`:** hace falta una línea en blanco después de
 `</summary>`, o el bloque HTML se traga el markdown y las tablas salen en crudo.
+
+## Diseño
+
+Identidad propia, derivada del tema. **No es plantilla y no se toca sin motivo.**
+
+**Color.** Tokens en `src/styles/global.css`, nunca colores sueltos. Neutro con
+sesgo frío hacia el acento (azul prusia `#12496e`) — «papel de trazado». El tema
+oscuro está **diseñado aparte**, no invertido: superficie azul-pizarra y el acento
+*sube* en luminosidad (`#79b3e0`). Divergente frío↔cálido = **probado ↔
+hipotético**, con gris neutro real en el centro para que se lea como «nada».
+Cualquier color nuevo se valida contra **ambas** superficies antes de fijarlo
+(texto ≥7:1, resto ≥4.5:1, marcas de gráfica ≥3:1).
+
+**Tipografía, tres papeles.** Serif del sistema en títulos (la notación del campo es
+un artefacto tipográfico de la imprenta de lógica); sans del sistema en texto; mono
+en datos, etiquetas en versalitas con `letter-spacing` y **todas las fórmulas
+lógicas** — son código, se leen carácter a carácter. Cero fuentes descargadas, cero
+CDNs.
+
+**El motivo estructural** es la *regla de mundo abierto*: tramo sólido → punto →
+punteado sin tope. Dice la tesis del cuaderno — lo que no está escrito no es falso,
+es desconocido. Es el `hr`. No es adorno: no se sustituye por una línea normal.
+
+**Componentes** (clases en `global.css`): `.tarjeta` de capítulo con `.cifras`,
+`.evidencia` (ficha del veredicto del razonador; `.hipotesis` para lo no deducido),
+`.errata` para documentar lo que salió mal, `.tabla-datos` para tablas numéricas
+—`nowrap` y alineadas a la derecha— frente a las de prosa, que fluyen.
+
+`hallazgo` y `cifras` van en el frontmatter y alimentan la tarjeta del índice.
+
+**Accesibilidad, no negociable:** `prefers-color-scheme` más botón que estampa
+`data-theme` en la raíz y gana en ambos sentidos; foco visible; enlace de salto;
+`prefers-reduced-motion`; todo bloque ancho con su propio `overflow-x` y el `body`
+sin desplazamiento lateral.
