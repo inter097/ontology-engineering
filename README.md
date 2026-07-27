@@ -94,19 +94,20 @@ sitio en **[ontologias.eliuth.dev](https://ontologias.eliuth.dev)**. Nada se dup
 ```
 .
 ├── capitulos/
-│   └── NN-nombre/
-│       ├── resumen.md          # qué dice el libro
-│       ├── ejercicios.md       # los del libro, resueltos paso a paso
-│       ├── caso-de-estudio.md  # el cierre: algo verificable, no un programa
-│       └── artefactos/         # .owl, scripts de verificación, requirements
+│   ├── NN-nombre.md            # una página por capítulo
+│   └── NN-nombre/artefactos/   # .owl, scripts de verificación, requirements
 ├── src/                        # el sitio (Astro): layout, páginas, índice global
 └── README.md
 ```
 
-Cada capítulo cierra con un **caso de estudio**: no un ejercicio más, sino un
-problema donde lo del capítulo se aplica a algo que un razonador puede confirmar o
-desmentir. El del capítulo 1 encuentra un error semántico real en la ontología de
-ejemplo del propio libro.
+Cada capítulo es **una sola página** con lo que dice el libro, los ejercicios
+resueltos y un caso de estudio, dosificados por relevancia: lo rutinario en corto,
+lo que de verdad cambia cómo modelas, extendido.
+
+El **caso de estudio** es el centro: no un ejercicio más, sino un problema donde lo
+del capítulo se aplica a algo que un razonador puede confirmar o desmentir. El del
+capítulo 1 encuentra un error semántico real en la ontología de ejemplo del propio
+libro.
 
 ### Comandos
 
@@ -125,7 +126,7 @@ python3 -m venv .venv && ./.venv/bin/pip install -r requirements.txt
 
 | Capítulo | Estado |
 |---|---|
-| 1 — Introduction | resumen · ejercicios · caso de estudio |
+| 1 — Introduction | [publicado](https://ontologias.eliuth.dev/capitulos/01-introduccion/) |
 | 2–10 | pendientes |
 
 Pendiente de definir: dominio de la ontología propia, alcance y preguntas de

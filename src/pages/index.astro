@@ -1,22 +1,22 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { CAPITULOS, ORDEN_SECCIONES, NOMBRE_SECCION } from '../capitulos';
+import { CAPITULOS } from '../capitulos';
 
 const entradas = await getCollection('capitulos');
-const publicados = new Set(entradas.map((e) => e.data.capitulo));
+const porCapitulo = new Map(entradas.map((e) => [e.data.capitulo, e]));
 ---
 
 <Base
   titulo="Ingeniería de ontologías — recorrido por Keet"
-  descripcion="Capítulo a capítulo del libro de Keet: resumen, ejercicios resueltos y un caso de estudio verificable en cada uno."
+  descripcion="Capítulo a capítulo del libro de Keet: qué dice, los ejercicios resueltos y un caso de estudio verificable en cada uno."
 >
   <h1>Ingeniería de ontologías</h1>
   <p class="lead">
     Un recorrido capítulo a capítulo por <i>An Introduction to Ontology
-    Engineering</i> de C. Maria Keet. Cada capítulo deja tres cosas: qué dice el
-    libro, los ejercicios resueltos paso a paso, y un caso de estudio donde eso se
-    aplica a algo que se puede comprobar con un razonador.
+    Engineering</i> de C. Maria Keet. Una página por capítulo: qué dice el libro,
+    los ejercicios resueltos, y un caso de estudio donde eso se aplica a algo que
+    se puede comprobar con un razonador.
   </p>
 
   <h2>El libro</h2>
@@ -36,18 +36,12 @@ const publicados = new Set(entradas.map((e) => e.data.capitulo));
   <h2>Capítulos</h2>
   {
     CAPITULOS.map((cap) => {
-      const secciones = entradas
-        .filter((e) => e.data.capitulo === cap.n)
-        .sort(
-          (a, b) =>
-            ORDEN_SECCIONES.indexOf(a.data.seccion) -
-            ORDEN_SECCIONES.indexOf(b.data.seccion),
-        );
+      const entrada = porCapitulo.get(cap.n);
       return (
         <div class="capitulo">
           <h2>
-            {publicados.has(cap.n) ? (
-              <a href={`/capitulos/${cap.slug}/resumen/`}>
+            {entrada ? (
+              <a href={`/capitulos/${entrada.id}/`}>
                 {cap.n}. {cap.titulo}
               </a>
             ) : (
@@ -56,20 +50,8 @@ const publicados = new Set(entradas.map((e) => e.data.capitulo));
               </span>
             )}
           </h2>
-          {cap.nota && <p>{cap.nota}</p>}
-          {secciones.length > 0 ? (
-            <ul class="secciones">
-              {secciones.map((s) => (
-                <li>
-                  <a href={`/capitulos/${s.id}/`}>
-                    {NOMBRE_SECCION[s.data.seccion]}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p class="pendiente">pendiente</p>
-          )}
+          <p>{entrada ? entrada.data.descripcion : cap.nota ?? ''}</p>
+          {!entrada && <p class="pendiente">pendiente</p>}
         </div>
       );
     })

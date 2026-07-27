@@ -23,10 +23,3 @@ export const CAPITULOS: Capitulo[] = [
   { n: 10, titulo: 'Advanced Modeling with Additional Language Features', slug: '10-modelado-avanzado' },
 ];
 
-export const ORDEN_SECCIONES = ['resumen', 'ejercicios', 'caso-de-estudio'] as const;
-
-export const NOMBRE_SECCION: Record<string, string> = {
-  resumen: 'resumen',
-  ejercicios: 'ejercicios',
-  'caso-de-estudio': 'caso de estudio',
-};

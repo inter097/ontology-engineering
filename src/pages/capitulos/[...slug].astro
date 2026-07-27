@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import { CAPITULOS, ORDEN_SECCIONES, NOMBRE_SECCION } from '../../capitulos';
+import { CAPITULOS } from '../../capitulos';
 
 export async function getStaticPaths() {
   const entradas = await getCollection('capitulos');
@@ -15,34 +15,12 @@ const { entrada } = Astro.props;
 const { Content } = await render(entrada);
 
 const cap = CAPITULOS.find((c) => c.n === entrada.data.capitulo)!;
-const hermanas = (await getCollection('capitulos'))
-  .filter((e) => e.data.capitulo === entrada.data.capitulo)
-  .sort(
-    (a, b) =>
-      ORDEN_SECCIONES.indexOf(a.data.seccion) -
-      ORDEN_SECCIONES.indexOf(b.data.seccion),
-  );
 ---
 
-<Base
-  titulo={`${entrada.data.titulo} — cap. ${cap.n}`}
-  descripcion={entrada.data.descripcion}
->
-  <p class="meta">
-    Capítulo {cap.n} · {cap.titulo} · {NOMBRE_SECCION[entrada.data.seccion]}
-  </p>
+<Base titulo={entrada.data.titulo} descripcion={entrada.data.descripcion}>
+  <p class="meta">Capítulo {cap.n} · {cap.titulo}</p>
   <h1>{entrada.data.titulo}</h1>
   <p class="lead">{entrada.data.descripcion}</p>
-
-  <ul class="secciones">
-    {
-      hermanas.map((s) => (
-        <li>
-          <a href={`/capitulos/${s.id}/`}>{NOMBRE_SECCION[s.data.seccion]}</a>
-        </li>
-      ))
-    }
-  </ul>
 
   <hr />
 
@@ -52,4 +30,5 @@ const hermanas = (await getCollection('capitulos'))
 
   <hr />
   <p class="meta">Cubre: Keet, {entrada.data.keet}</p>
+  <p class="meta"><a href="/capitulos/">← todos los capítulos</a></p>
 </Base>

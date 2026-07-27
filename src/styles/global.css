@@ -111,18 +111,6 @@ th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; colo
 .capitulo h2 { margin: 0 0 0.3rem; font-size: 1.2rem; }
 .capitulo h2 a { text-decoration: none; }
 .capitulo p { margin: 0 0 0.75rem; color: var(--muted); }
-.secciones { display: flex; gap: 0.5rem; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; }
-.secciones a {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.75rem;
-  text-decoration: none;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0.2rem 0.7rem;
-  display: inline-block;
-}
-.secciones a:hover { border-color: var(--accent); }
-
 .pendiente { color: var(--muted); font-style: italic; }
 
 footer {

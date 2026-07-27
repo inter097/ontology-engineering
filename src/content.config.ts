@@ -3,14 +3,15 @@ import { glob } from 'astro/loaders';
 
 // Una sola fuente de verdad: los .md viven en /capitulos, navegables en GitHub,
 // y de ahí mismo se genera el sitio. Nada se duplica.
+//
+// Una página por capítulo: `capitulos/NN-nombre.md`. Los artefactos ejecutables
+// van en la carpeta hermana `capitulos/NN-nombre/artefactos/`, que el patrón del
+// loader deja fuera a propósito.
 const capitulos = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './capitulos' }),
+  loader: glob({ pattern: '*.md', base: './capitulos' }),
   schema: z.object({
     titulo: z.string(),
     capitulo: z.number(),
-    // resumen = qué dice el libro · ejercicios = resueltos paso a paso
-    // caso-de-estudio = el cierre del capítulo, algo verificable
-    seccion: z.enum(['resumen', 'ejercicios', 'caso-de-estudio']),
     descripcion: z.string(),
     keet: z.string().describe('capítulo/secciones de Keet que cubre'),
   }),

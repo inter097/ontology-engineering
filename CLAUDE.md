@@ -28,30 +28,36 @@ python3 -m venv .venv && ./.venv/bin/pip install -r requirements.txt
 
 ## Arquitectura
 
-- `capitulos/NN-nombre/{resumen,ejercicios,caso-de-estudio}.md` — el contenido.
-  Frontmatter validado por Zod en `src/content.config.ts`; el `build` falla si no
-  encaja. `seccion` solo admite esos tres valores.
+- `capitulos/NN-nombre.md` — **una sola página por capítulo**. Frontmatter validado
+  por Zod en `src/content.config.ts`; el `build` falla si no encaja.
 - `capitulos/NN-nombre/artefactos/` — `.owl`, `verificar.py`, `requirements.txt`.
+  El loader usa `pattern: '*.md'` (un nivel), así que esta carpeta hermana queda
+  fuera de la colección a propósito.
 - `src/capitulos.ts` — registro de los 10 capítulos con la numeración verificada.
   **Al añadir un capítulo se toca este archivo**, o el índice no lo enlaza; el
   loader de contenido no conoce los títulos ni el orden.
-- `src/pages/capitulos/[...slug].astro` — una página por Markdown; el `slug` es la
-  ruta relativa dentro de `capitulos/` (`01-introduccion/resumen`).
+- `src/pages/capitulos/[...slug].astro` — una página por Markdown; el `slug` es el
+  nombre del archivo sin extensión (`01-introduccion`).
 
 **Frontmatter:** entrecomillar `descripcion` y `titulo` siempre. Llevan `:` y `«»`
 y YAML rompe el build sin comillas.
 
 ## Cómo se trabaja un capítulo
 
-Los tres archivos tienen papeles distintos y no deben solaparse:
+Una página, con tres cosas dentro y **dosificadas por relevancia** — es la petición
+explícita del autor: lo rutinario en tablas y párrafos cortos, lo que de verdad
+cambia cómo modelas, extendido.
 
-1. **resumen** — qué dice el libro, con las secciones citadas (`§N.x`).
-2. **ejercicios** — los del libro, enunciado citado literal + resolución propia.
-   Marcar explícitamente lo que es criterio propio y no del libro.
-3. **caso de estudio** — el cierre. No un programa: un problema donde lo del
-   capítulo se aplica a algo que un razonador confirma o desmiente. Toda
-   afirmación del texto debe corresponder a una comprobación en `verificar.py`.
-   Si no se puede verificar, no se afirma.
+1. **Qué dice el libro**, con las secciones citadas (`§N.x`). Comprimir aquí.
+2. **Caso de estudio** — el centro de la página, y lo que va extendido. No un
+   programa: un problema donde lo del capítulo se aplica a algo que un razonador
+   confirma o desmiente. Toda afirmación del texto debe corresponder a una
+   comprobación en `verificar.py`. Si no se puede verificar, no se afirma.
+3. **Ejercicios** del libro, enunciado citado literal + resolución propia. Marcar
+   explícitamente lo que es criterio propio. Comprimir los rutinarios; si un
+   ejercicio alimenta el caso de estudio, remitir en vez de repetir.
+
+No repetir el mismo contenido en dos sitios de la página.
 
 ## Reglas de contenido (no negociables)
 
