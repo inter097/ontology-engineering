@@ -18,7 +18,9 @@ const cap = CAPITULOS.find((c) => c.n === entrada.data.capitulo)!;
 ---
 
 <Base titulo={entrada.data.titulo} descripcion={entrada.data.descripcion}>
-  <p class="meta">Capítulo {cap.n} · {cap.titulo}</p>
+  <p class="meta">
+    {cap.propio ? 'Página propia · no es del libro' : `Capítulo ${cap.n} · ${cap.titulo}`}
+  </p>
   <h1>{entrada.data.titulo}</h1>
   <p class="lead">{entrada.data.descripcion}</p>
 

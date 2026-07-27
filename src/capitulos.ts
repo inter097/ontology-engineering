@@ -9,9 +9,12 @@ export interface Capitulo {
   slug: string;
   /** por qué se lee cuando se lee, según la ruta de lectura del repo */
   nota?: string;
+  /** true = página propia, no un capítulo del libro (el 0) */
+  propio?: boolean;
 }
 
 export const CAPITULOS: Capitulo[] = [
+  { n: 0, titulo: 'Los símbolos, antes de empezar', slug: '00-simbolos', propio: true, nota: 'página propia: por qué hay dos notaciones y cómo se lee cada símbolo' },
   { n: 1, titulo: 'Introduction', slug: '01-introduccion', nota: 'qué es una ontología y por qué no es una base de datos' },
   { n: 2, titulo: 'First-Order Logic and Automated Reasoning in a Nutshell', slug: '02-logica-primer-orden' },
   { n: 3, titulo: 'Description Logics', slug: '03-logicas-descriptivas', nota: 'explica por qué el razonador infiere lo que infiere' },

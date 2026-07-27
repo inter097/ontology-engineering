@@ -9,35 +9,8 @@ El capítulo 2 es la maquinaria. No hay ontologías aquí: hay lógica de primer
 teoría de modelos y tres formas distintas de sacar conclusiones. Es corto y el libro
 lo llama explícitamente *in a nutshell* — no pretende sustituir un curso de lógica.
 
-<details class="peras">
-<summary>Los símbolos, en dos minutos</summary>
-
-Los símbolos dan más miedo del que merecen. Cada uno es una palabra abreviada.
-Estos son los únicos que hacen falta:
-
-| Cuando veas | Lee | Ejemplo |
-|---|---|---|
-| `∀` | «todos» | «todos los leones son mamíferos» |
-| `∃` | «algún» | «hay algún león» |
-| `¬` | «no» | |
-| `⊑` | «es un tipo de» | `león ⊑ animal` — un león es un tipo de animal |
-| `⊓` | «y a la vez» | `león ⊓ hambriento` — leones que además tienen hambre |
-| `⊔` | «o» | |
-| `⊥` | «imposible» | |
-| `⊨` | «se sigue» | |
-
-Y uno compuesto, que es el que importa de verdad:
-
-- `∃come.Carne` = **«come carne»**
-- `∀come.Carne` = **«no come otra cosa que carne»**
-
-Parecen lo mismo y no lo son. Tienen su propio apartado más abajo, porque es de
-donde salen casi todos los errores.
-
-Eso es todo. Si en algún momento aparece un símbolo que no está aquí, la página
-lo explica al lado.
-
-</details>
+> Si los símbolos (`∀`, `∃`, `⊑`, `⊨`) todavía no te dicen nada, están todos
+> explicados uno a uno en el [capítulo 0](/capitulos/00-simbolos/).
 
 Pero resuelve algo que quedó suelto en el capítulo 1. Allí el razonador se negó a
 deducir que los impalas son herbívoros, y quedó como una rareza del mundo abierto.

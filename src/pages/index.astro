@@ -34,6 +34,11 @@ const porCapitulo = new Map(entradas.map((e) => [e.data.capitulo, e]));
   </p>
 
   <h2>Capítulos</h2>
+  <p>
+    El <a href="/capitulos/00-simbolos/">capítulo 0</a> no es del libro: explica los
+    símbolos y las cuatro ideas que hacen falta para leer el resto. Si la notación
+    lógica te resulta ajena, empieza ahí.
+  </p>
   {
     CAPITULOS.map((cap) => {
       const entrada = porCapitulo.get(cap.n);

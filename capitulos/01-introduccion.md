@@ -101,53 +101,21 @@ Mira los dos cuantificadores de esa única línea:
 ```
 
 <details class="peras">
-<summary>¿Y esos símbolos? Sin jerga</summary>
-
-Solo hay dos, y la diferencia entre ellos es la que rompe ontologías.
+<summary>¿Y esos símbolos? El resumen de treinta segundos</summary>
 
 Piensa en un amigo vegetariano.
 
-**«Come verdura»** — te está diciendo que hay verdura de por medio. Si lleva tres
-días sin probar bocado, la frase es falsa. Esto es el símbolo **`∃`**.
+- **`∃come.Verdura`** = «come verdura». Promete que hay verdura de por medio.
+- **`∀come.Verdura`** = «no come otra cosa que verdura». No promete nada: prohíbe.
 
-**«No come otra cosa que verdura»** — esto no dice que coma. Dice qué **no** hace.
-Es una prohibición. Esto es el símbolo **`∀`**.
+Si lleva tres días **sin comer nada**, sigue siendo verdad que «no come otra cosa
+que verdura» — y también «que carne», y «que piedras». Las tres a la vez, porque no
+hay ni un contraejemplo. De ahí viene todo lo que se rompe más abajo.
 
-Y aquí está el detalle que lo cambia todo:
+Los otros: **`⊑`** = «es un tipo de», **`⊓`** = «y a la vez», **`⊥`** = «imposible».
 
-> Si tu amigo lleva tres días **sin comer nada**, sigue siendo verdad que «no come
-> otra cosa que verdura». No hay nada que le puedas reprochar.
-
-De hecho, por la misma razón, también es verdad que «no come otra cosa que carne».
-Y que «no come otra cosa que piedras». **Todas son verdad a la vez**, porque no hay
-ningún contraejemplo.
-
-Suena a truco de abogado, y lo es. Pero el razonador razona así, y por eso:
-
-| Lo que quieres decir | Hace falta |
-|---|---|
-| «come verdura» | `∃` |
-| «no come otra cosa» | `∀` |
-| «come verdura y nada más» | **los dos juntos** |
-
-La tercera fila es la que casi nadie escribe. Y es casi siempre la que hacía falta.
-
----
-
-Los otros tres símbolos de esta página son más fáciles:
-
-- **`⊑`** = «es un tipo de». `lion ⊑ animal` — un león es un tipo de animal.
-- **`⊓`** = «y a la vez».
-- **`⊥`** = «imposible».
-
-Con eso ya se lee entera la línea del león:
-
-```
-lion ⊑ ∀eats.herbivore ⊓ ∃eats.Impala
-```
-
-> «Un león es un animal que **no come otra cosa que** herbívoros, **y** que **sí
-> come** algún impala.»
+Versión larga, con los dos juegos de notación y por qué son dos:
+[capítulo 0](/capitulos/00-simbolos/).
 
 </details>
 
