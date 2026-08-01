@@ -9,9 +9,14 @@ sitio: los mismos Markdown de `capitulos/` se leen en GitHub y generan
 `ontologias.eliuth.dev` (Astro, salida estática, deploy en Vercel). No hay copia
 del contenido en `src/` — si algo se duplica, está mal.
 
-Capítulo 1 publicado. Los demás, pendientes. Sigue sin definirse la ontología
-propia (dominio, alcance, preguntas de competencia), que es por donde manda
-empezar el capítulo 5.
+Los 12 capítulos (0–11) están escritos, cada uno con su `verificar.py` en verde
+—113 comprobaciones—. La portada cierra con el resumen destilado (`src/resumen.ts`),
+después de las tarjetas: primero se entra a los capítulos, y quien no entre se
+lleva lo esencial.
+
+Sigue sin definirse la ontología propia (dominio, alcance, preguntas de
+competencia), que es por donde manda empezar el capítulo 5: los casos de estudio
+se apoyan en las ontologías y ejercicios del libro.
 
 ## Comandos
 

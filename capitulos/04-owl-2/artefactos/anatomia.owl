@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://ontologias.eliuth.dev/anatomia.owl"
+         xmlns="http://ontologias.eliuth.dev/anatomia.owl#">
+
+<owl:Ontology rdf:about="http://ontologias.eliuth.dev/anatomia.owl"/>
+
+<owl:ObjectProperty rdf:about="#partOf">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+  <rdfs:domain rdf:resource="#BodyPart"/>
+  <rdfs:range rdf:resource="#BodyPart"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#injuryOf">
+  <rdfs:domain rdf:resource="#Injury"/>
+  <rdfs:range rdf:resource="#BodyPart"/>
+  <owl:propertyChainAxiom>
+    <rdf:Description>
+      <rdf:first rdf:resource="#injuryOf"/>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first rdf:resource="#partOf"/>
+          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </owl:propertyChainAxiom>
+</owl:ObjectProperty>
+
+<owl:Class rdf:about="#BodyPart">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Injury">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:NamedIndividual rdf:about="#hueso_escafoides">
+  <rdf:type rdf:resource="#BodyPart"/>
+  <partOf rdf:resource="#mano_derecha"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#mano_derecha">
+  <rdf:type rdf:resource="#BodyPart"/>
+  <partOf rdf:resource="#brazo_derecho"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#brazo_derecho">
+  <rdf:type rdf:resource="#BodyPart"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#fractura_del_escafoides">
+  <rdf:type rdf:resource="#Injury"/>
+  <injuryOf rdf:resource="#hueso_escafoides"/>
+</owl:NamedIndividual>
+
+
+</rdf:RDF>

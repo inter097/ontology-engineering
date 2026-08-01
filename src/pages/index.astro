@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import TarjetaCapitulo from '../components/TarjetaCapitulo.astro';
 import { CAPITULOS } from '../capitulos';
+import { RESUMEN, TRANSVERSALES } from '../resumen';
 
 const entradas = await getCollection('capitulos');
 const porCapitulo = new Map(entradas.map((e) => [e.data.capitulo, e]));
@@ -50,4 +51,57 @@ const hechos = entradas.length;
       ))
     }
   </div>
+
+  <hr />
+
+  <h2 id="resumen">Lo esencial de cada capítulo</h2>
+
+  <p class="medida">
+    El destilado: de cada capítulo, la idea que cambia cómo se modela y el
+    hallazgo que un razonador confirmó. Si algo hay que llevarse del libro
+    entero, es esto.
+  </p>
+
+  <div class="resumen">
+    {
+      RESUMEN.map((r) => (
+        <section class="resumen-fila">
+          <h3>
+            <a href={`/capitulos/${r.slug}/`}>
+              <span class="resumen-n">{r.n}</span> {r.tema}
+            </a>
+          </h3>
+          <p class="resumen-idea"><b>Lo esencial:</b> <Fragment set:html={r.esencial} /></p>
+          <p class="resumen-hallazgo"><b>Comprobado:</b> <Fragment set:html={r.comprobado} /></p>
+        </section>
+      ))
+    }
+  </div>
+
+  <hr />
+
+  <h2>Los cuatro errores que se repiten</h2>
+
+  <p class="medida">
+    Los mismos fallos reaparecen en capítulos que no tienen nada que ver entre
+    sí. Cada uno está verificado en más de una página.
+  </p>
+
+  <ol class="medida errores-transversales">
+    {
+      TRANSVERSALES.map((t) => (
+        <li>
+          <b>{t.titulo}.</b> <Fragment set:html={t.texto} />
+          <span class="donde">
+            {t.donde.map((d, i) => (
+              <>
+                {i > 0 && ' · '}
+                <a href={`/capitulos/${d.slug}/`}>cap. {d.n}</a>
+              </>
+            ))}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
 </Base>

@@ -124,13 +124,31 @@ python3 -m venv .venv && ./.venv/bin/pip install -r requirements.txt
 
 ## Estado
 
-| Capítulo | Estado |
+Las doce páginas están publicadas, cada una con su caso de estudio y su
+`verificar.py`. Todas las comprobaciones pasan en verde: **113 afirmaciones**
+reproducidas con HermiT.
+
+| Capítulo | Comprobaciones |
 |---|---|
-| 1 — Introduction | [publicado](https://ontologias.eliuth.dev/capitulos/01-introduccion/) |
-| 2–10 | pendientes |
+| [0 — Los símbolos](https://ontologias.eliuth.dev/capitulos/00-simbolos/) | — (página propia, no del libro) |
+| [1 — Introduction](https://ontologias.eliuth.dev/capitulos/01-introduccion/) | 13 |
+| [2 — First-Order Logic](https://ontologias.eliuth.dev/capitulos/02-logica-primer-orden/) | 8 |
+| [3 — Description Logics](https://ontologias.eliuth.dev/capitulos/03-logicas-descriptivas/) | 9 |
+| [4 — OWL 2](https://ontologias.eliuth.dev/capitulos/04-owl-2/) | 8 |
+| [5 — Methods and Methodologies](https://ontologias.eliuth.dev/capitulos/05-metodologias/) | 17 |
+| [6 — Top-down](https://ontologias.eliuth.dev/capitulos/06-top-down/) | 9 |
+| [7 — Bottom-up](https://ontologias.eliuth.dev/capitulos/07-bottom-up/) | 12 |
+| [8 — OBDA](https://ontologias.eliuth.dev/capitulos/08-obda/) | 8 |
+| [9 — Lenguas naturales](https://ontologias.eliuth.dev/capitulos/09-lenguaje-natural/) | 9 |
+| [10 — Modelado avanzado](https://ontologias.eliuth.dev/capitulos/10-modelado-avanzado/) | 8 |
+| [11 — Modularización](https://ontologias.eliuth.dev/capitulos/11-modularizacion/) | 12 |
+
+La portada cierra con **[lo esencial de cada capítulo](https://ontologias.eliuth.dev/#resumen)**
+y los cuatro errores que se repiten a lo largo del libro.
 
 Pendiente de definir: dominio de la ontología propia, alcance y preguntas de
-competencia iniciales — que es justamente por donde manda empezar el capítulo 5.
+competencia iniciales — que es justamente por donde manda empezar el capítulo 5,
+y lo único del libro que sigue sin ejercitarse sobre material propio.
 
 ---
 

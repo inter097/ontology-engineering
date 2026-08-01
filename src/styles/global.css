@@ -664,3 +664,77 @@ footer.pie {
     font-size: 1.1rem;
   }
 }
+
+/* ---------- resumen de portada ---------- */
+/* Va al final de la portada, después de las tarjetas: primero se entra a los
+   capítulos, y quien no entre se lleva el destilado. */
+
+.resumen {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--linea);
+}
+
+.resumen-fila {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--linea);
+  max-width: var(--banda);
+}
+
+.resumen-fila h3 {
+  font-size: 1.1rem;
+  margin: 0 0 0.4rem;
+}
+
+.resumen-fila h3 a {
+  text-decoration: none;
+  color: var(--tinta);
+}
+.resumen-fila h3 a:hover {
+  color: var(--acento);
+  text-decoration: underline;
+}
+
+.resumen-n {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--acento);
+  margin-right: 0.5rem;
+}
+
+.resumen-fila p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.resumen-fila b:first-child {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--apagado);
+  font-weight: 400;
+  margin-right: 0.4rem;
+}
+
+/* el hallazgo es lo verificado: se marca con el frío del par probado↔hipotético */
+.resumen-hallazgo {
+  border-left: 2px solid var(--frio);
+  padding-left: 0.75rem;
+  color: var(--apagado);
+}
+
+.errores-transversales {
+  margin-top: 1.25rem;
+}
+
+.errores-transversales li {
+  margin-bottom: 1rem;
+}
+
+.errores-transversales .donde {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--apagado);
+}
