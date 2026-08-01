@@ -164,7 +164,7 @@ contra la ontología del propio libro.
 
 ---
 
-# Caso de estudio: la brizna de hierba que rompe la ontología del libro
+<h2 class="caso">Caso de estudio: la brizna de hierba que rompe la ontología del libro</h2>
 
 Todo lo que sigue se reproduce con:
 

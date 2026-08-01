@@ -88,7 +88,7 @@ lógica — no permite decir «siempre», permite decir «durante este intervalo
 
 ---
 
-# Caso de estudio: la frontera inventada y el cambio de estado
+<h2 class="caso">Caso de estudio: la frontera inventada y el cambio de estado</h2>
 
 Reproducible con:
 

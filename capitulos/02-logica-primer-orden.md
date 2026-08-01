@@ -169,7 +169,7 @@ tienes la prueba de que tu teoría no dice lo que creías.
 
 ---
 
-# Caso de estudio: el impala no era un fallo, era una abducción
+<h2 class="caso">Caso de estudio: el impala no era un fallo, era una abducción</h2>
 
 Reproducible con:
 

@@ -65,7 +65,7 @@ con concordancia rica hay que generar morfología, no solo rellenar huecos.
 
 ---
 
-# Caso de estudio: traducir bien y aun así romperlo
+<h2 class="caso">Caso de estudio: traducir bien y aun así romperlo</h2>
 
 Reproducible con:
 

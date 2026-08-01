@@ -99,7 +99,7 @@ siempre es una aproximación, y conviene saber cuál.
 
 ---
 
-# Caso de estudio: el rockdassie, y la hoja que acabó siendo parte del bosque
+<h2 class="caso">Caso de estudio: el rockdassie, y la hoja que acabó siendo parte del bosque</h2>
 
 Reproducible con:
 

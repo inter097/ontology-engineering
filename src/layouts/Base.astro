@@ -4,9 +4,37 @@ import '../styles/global.css';
 interface Props {
   titulo: string;
   descripcion?: string;
+  /** una página de capítulo: se declara como TechArticle y og:type article */
+  articulo?: boolean;
 }
 
-const { titulo, descripcion } = Astro.props;
+const { titulo, descripcion, articulo } = Astro.props;
+const url = new URL(Astro.url.pathname, Astro.site);
+
+// Sin og:image a propósito: no hay ningún asset que valga la pena servir, y
+// una imagen inventada costaría más de lo que aporta.
+const datos = {
+  '@context': 'https://schema.org',
+  '@type': articulo ? 'TechArticle' : 'WebSite',
+  name: titulo,
+  description: descripcion,
+  url: url.href,
+  inLanguage: 'es',
+  ...(articulo && {
+    headline: titulo,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'Ingeniería de ontologías',
+      url: Astro.site?.href,
+    },
+    citation: {
+      '@type': 'Book',
+      name: 'An Introduction to Ontology Engineering',
+      author: { '@type': 'Person', name: 'C. Maria Keet' },
+      datePublished: '2020',
+    },
+  }),
+};
 ---
 
 <html lang="es">
@@ -15,7 +43,17 @@ const { titulo, descripcion } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{titulo}</title>
     {descripcion && <meta name="description" content={descripcion} />}
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={url} />
+
+    <meta property="og:type" content={articulo ? 'article' : 'website'} />
+    <meta property="og:site_name" content="Ingeniería de ontologías" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:url" content={url} />
+    {descripcion && <meta property="og:description" content={descripcion} />}
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(datos)} />
+
     <meta name="color-scheme" content="light dark" />
     {/* Se aplica antes de pintar para que no haya destello al cargar. */}
     <script is:inline>
@@ -52,14 +90,20 @@ const { titulo, descripcion } = Astro.props;
     <main id="contenido">
       <div class="wrap">
         <slot />
-        <footer class="pie">
-          Cada decisión de modelado citada contra Keet, C.M. <i>An Introduction to
-          Ontology Engineering</i>, v1.5 (2020) — copia en
-          <a href="https://github.com/inter097/ontology-engineering/tree/main/libro">/libro</a>.
-          Lo que no tiene respaldo en el libro se marca como criterio propio.
-        </footer>
       </div>
     </main>
+
+    {/* fuera de <main>: dentro no sería un landmark contentinfo */}
+    <footer class="pie">
+      <div class="wrap">
+        <div class="pie-texto">
+        Cada decisión de modelado citada contra Keet, C.M. <i>An Introduction to
+        Ontology Engineering</i>, v1.5 (2020) — copia en
+        <a href="https://github.com/inter097/ontology-engineering/tree/main/libro">/libro</a>.
+        Lo que no tiene respaldo en el libro se marca como criterio propio.
+        </div>
+      </div>
+    </footer>
 
     <script is:inline>
       (function () {

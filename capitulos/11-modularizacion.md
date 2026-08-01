@@ -86,7 +86,7 @@ la pregunta.
 
 ---
 
-# Caso de estudio: el mismo módulo, tres veces
+<h2 class="caso">Caso de estudio: el mismo módulo, tres veces</h2>
 
 Reproducible con:
 

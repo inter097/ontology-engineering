@@ -93,7 +93,7 @@ dos partes hace el trabajo de la otra.
 
 ---
 
-# Caso de estudio: la misma pregunta, tres respuestas
+<h2 class="caso">Caso de estudio: la misma pregunta, tres respuestas</h2>
 
 Reproducible con:
 

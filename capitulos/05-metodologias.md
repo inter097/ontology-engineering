@@ -100,7 +100,7 @@ correcto. No se sustituyen entre sí.
 
 ---
 
-# Caso de estudio: las once preguntas del libro contra la ontología del libro
+<h2 class="caso">Caso de estudio: las once preguntas del libro contra la ontología del libro</h2>
 
 Reproducible con:
 

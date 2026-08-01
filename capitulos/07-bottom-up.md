@@ -103,7 +103,7 @@ venir ya alineado con una fundacional.
 
 ---
 
-# Caso de estudio: lo que sobrevive a la conversión y lo que no
+<h2 class="caso">Caso de estudio: lo que sobrevive a la conversión y lo que no</h2>
 
 Reproducible con:
 

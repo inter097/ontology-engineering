@@ -139,6 +139,13 @@ h3 {
   margin: 2.2rem 0 0.6rem;
 }
 
+/* El caso de estudio abre la sección central de la página y lleva su peso
+   visual, pero no es otro documento: h2, no h1. Un solo h1 por página. */
+.contenido h2.caso {
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.1rem);
+  margin-top: 3.5rem;
+}
+
 p,
 ul,
 ol {
@@ -635,11 +642,16 @@ details.defensa > summary {
 /* ---------- pie ---------- */
 
 footer.pie {
-  border-top: 1px solid var(--linea);
   margin-top: 4.5rem;
-  padding-top: 1.5rem;
   font-size: 0.85rem;
   color: var(--apagado);
+}
+
+/* la regla y la medida van en el texto, no en el landmark: el borde no debe
+   cruzar el viewport entero */
+.pie-texto {
+  border-top: 1px solid var(--linea);
+  padding-top: 1.5rem;
   max-width: var(--medida);
 }
 

@@ -156,7 +156,7 @@ se deduce.
 
 ---
 
-# Caso de estudio: el ejercicio de los veganos, y lo que el ejercicio no dice
+<h2 class="caso">Caso de estudio: el ejercicio de los veganos, y lo que el ejercicio no dice</h2>
 
 Reproducible con:
 
