@@ -750,3 +750,83 @@ footer.pie {
   font-size: 0.78rem;
   color: var(--apagado);
 }
+
+/* ---------- guía «de cero» de la portada ---------- */
+/* Cierra la portada: el destilado puesto en procedimiento. El par de colores es
+   el mismo de todo el cuaderno — cálido = ilustrativo (el ejemplo del taller, sin
+   verificar), frío = remite a algo que un razonador comprobó en su capítulo. */
+
+.ejemplo-guia {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1rem;
+  background: var(--papel-alto);
+  border: 1px solid var(--linea);
+  border-left: 3px solid var(--calido);
+  font-size: 0.95rem;
+}
+
+.guia {
+  margin-top: 1.75rem;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.guia-paso {
+  max-width: var(--banda);
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--linea);
+}
+
+.guia-paso:last-child {
+  border-bottom: 1px solid var(--linea);
+}
+
+.guia-paso h3 {
+  font-size: 1.1rem;
+  margin: 0 0 0.15rem;
+}
+
+.guia-n {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--acento);
+  margin-right: 0.5rem;
+}
+
+.guia-donde {
+  margin: 0 0 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--apagado);
+}
+
+.guia-paso p {
+  font-size: 0.95rem;
+  margin: 0.35rem 0;
+}
+
+.guia-ejemplo,
+.guia-trampa {
+  padding-left: 0.75rem;
+  color: var(--apagado);
+}
+
+.guia-ejemplo {
+  border-left: 2px solid var(--calido);
+}
+
+.guia-trampa {
+  border-left: 2px solid var(--frio);
+}
+
+.guia-ejemplo b:first-child,
+.guia-trampa b:first-child {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--apagado);
+  font-weight: 400;
+  margin-right: 0.4rem;
+}

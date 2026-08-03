@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import TarjetaCapitulo from '../components/TarjetaCapitulo.astro';
 import { CAPITULOS } from '../capitulos';
 import { RESUMEN, TRANSVERSALES } from '../resumen';
+import { PASOS, EJEMPLO } from '../guia';
 
 const entradas = await getCollection('capitulos');
 const porCapitulo = new Map(entradas.map((e) => [e.data.capitulo, e]));
@@ -100,6 +101,49 @@ const hechos = entradas.length;
               </>
             ))}
           </span>
+        </li>
+      ))
+    }
+  </ol>
+
+  <hr />
+
+  <h2 id="guia">Cómo se hace una, de cero</h2>
+
+  <p class="medida">
+    Los doce pasos en el orden en que el libro manda darlos, cada uno con el
+    capítulo que lo respalda y el error caro que evita. Es lo mismo de arriba,
+    puesto en procedimiento: <b>los pasos 1 y 2 son los que deciden si el resto
+    sirve</b>, y son los que todo el mundo se salta.
+  </p>
+
+  <p class="medida ejemplo-guia">
+    <b>{EJEMPLO.titulo}.</b> <Fragment set:html={EJEMPLO.texto} />
+  </p>
+
+  <ol class="guia">
+    {
+      PASOS.map((p) => (
+        <li class="guia-paso">
+          <h3>
+            <span class="guia-n">{String(p.n).padStart(2, '0')}</span>
+            {p.titulo}
+          </h3>
+          <p class="guia-donde">
+            {p.donde.map((d, i) => (
+              <>
+                {i > 0 && ' · '}
+                <a href={`/capitulos/${d.slug}/`}>cap. {d.n}</a>
+              </>
+            ))}
+          </p>
+          <p class="guia-hacer"><Fragment set:html={p.hacer} /></p>
+          <p class="guia-ejemplo">
+            <b>En el taller:</b> <Fragment set:html={p.ejemplo} />
+          </p>
+          <p class="guia-trampa">
+            <b>La trampa:</b> <Fragment set:html={p.trampa} />
+          </p>
         </li>
       ))
     }
